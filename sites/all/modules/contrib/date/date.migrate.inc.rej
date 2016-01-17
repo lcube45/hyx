@@ -1,0 +1,32 @@
+***************
+*** 129,134 ****
+        // timestamp for 'now'.
+        if (empty($from)) {
+          $return[$language][$delta]['value'] = NULL;
+          if (!empty($field_info['settings']['todate'])) {
+            $return[$language][$delta]['value2'] = NULL;
+          }
+--- 129,135 ----
+        // timestamp for 'now'.
+        if (empty($from)) {
+          $return[$language][$delta]['value'] = NULL;
++         $return[$language][$delta]['timezone'] = NULL;
+          if (!empty($field_info['settings']['todate'])) {
+            $return[$language][$delta]['value2'] = NULL;
+          }
+***************
+*** 179,184 ****
+        }
+        else {
+          $return[$language][$delta]['value'] = $from;
+          if (!empty($to)) {
+            $return[$language][$delta]['value2'] = $to;
+          }
+--- 180,186 ----
+        }
+        else {
+          $return[$language][$delta]['value'] = $from;
++         $return[$language][$delta]['timezone'] = $timezone;
+          if (!empty($to)) {
+            $return[$language][$delta]['value2'] = $to;
+          }

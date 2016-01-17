@@ -1,0 +1,129 @@
+; Packaging information for ads_core
+name = "starter"
+description = "LCUBE - starter kit"
+core = "7.x"
+exclusive = "1"
+
+; -------------------------
+; Dependencies
+; -------------------------
+
+; Core/Coeur
+dependencies[] = block
+dependencies[] = contextual
+dependencies[] = dblog
+dependencies[] = field
+dependencies[] = field_sql_storage
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = filter
+dependencies[] = image
+dependencies[] = list
+dependencies[] = locale
+dependencies[] = menu
+dependencies[] = node
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = search
+dependencies[] = system
+dependencies[] = taxonomy
+dependencies[] = text
+dependencies[] = trigger
+dependencies[] = user
+
+; Administration
+dependencies[] = admin_menu
+dependencies[] = admin_views
+dependencies[] = adminimal_admin_menu
+
+; Chaos tool suite
+dependencies[] = ctools
+dependencies[] = fape
+dependencies[] = page_manager
+dependencies[] = views_content
+
+; Clean Markup
+dependencies[] = clean_markup
+dependencies[] = clean_markup_blocks
+dependencies[] = clean_markup_panels
+
+; Date/Time
+dependencies[] = date
+dependencies[] = date_all_day
+dependencies[] = date_api
+dependencies[] = date_popup
+dependencies[] = date_views
+
+; Development
+dependencies[] = devel
+
+; Features
+dependencies[] = features
+dependencies[] = features_roles_permissions
+
+; Fields
+dependencies[] = addressfield
+dependencies[] = email
+dependencies[] = entityreference
+dependencies[] = field_collection
+dependencies[] = field_group
+dependencies[] = inline_entity_form
+dependencies[] = link
+
+; Multilingual
+dependencies[] = l10n_update
+
+; Other
+dependencies[] = back_to_top
+dependencies[] = diff
+dependencies[] = entity
+dependencies[] = entity_token
+dependencies[] = libraries
+dependencies[] = menu_attributes
+dependencies[] = menu_block
+dependencies[] = menu_block_export
+dependencies[] = pagepreview
+dependencies[] = pathauto
+dependencies[] = publish_button
+dependencies[] = role_export
+dependencies[] = shs
+dependencies[] = simple_gmap
+dependencies[] = special_menu_items
+dependencies[] = strongarm
+dependencies[] = token
+dependencies[] = token_tweaks
+dependencies[] = transliteration
+
+;Panels
+dependencies[] = panels
+dependencies[] = panels_ipe
+dependencies[] = panelizer
+dependencies[] = fieldable_panels_panes
+dependencies[] = panels_bootstrap_layouts
+dependencies[] = panels_extra_layouts
+
+; Statistics
+dependencies[] = captcha
+dependencies[] = image_captcha
+
+; User interface/Interface utilisateur
+dependencies[] = chosen
+dependencies[] = jquery_update
+
+; UUID
+dependencies[] = uuid
+dependencies[] = uuid_path
+
+; Views
+dependencies[] = views
+dependencies[] = views_between_dates_filter
+dependencies[] = views_bootstrap
+dependencies[] = views_bulk_operations
+dependencies[] = views_ui
+
+; ----------
+; System Requirements
+; ----------
+php_memory_limit = 128M
+php = 5.3

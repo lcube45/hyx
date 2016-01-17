@@ -1,0 +1,318 @@
+<?php
+
+/**
+ * Implements hook_requirements().
+ */
+function starter_requirements($phase) {
+    $requirements = array();
+    // Ensure translations don't break during installation.
+    $t = get_t();
+    if($phase == 'install') {
+
+        // Test PHP minimum execution time
+        $requirements['php_max_execution_time'] = array(
+            'title' => $t('PHP Max Execution Time'),
+            'value' => ini_get('max_execution_time'),
+        );
+        $max_execution_time = (int)ini_get('max_execution_time');
+        // Don't set the error when max_execution_time is 0 (Infinite).
+        if ($max_execution_time && $max_execution_time < DRUPAL_MINIMUM_MAX_EXECUTION_TIME) {
+            $requirements['php_max_execution_time']['description'] = $t('Your PHP execution time is too low, please set it greater than or equal to %time seconds.', array('%time' => DRUPAL_MINIMUM_MAX_EXECUTION_TIME));
+            $requirements['php_max_execution_time']['severity'] = REQUIREMENT_ERROR;
+        }
+    }
+    return $requirements;
+}
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ */
+function starter_install() {
+
+    // set themes settings
+    _starter_set_language();
+
+    // create files folders
+    _starter_create_folders();
+
+    // set themes settings
+    _starter_set_theme();
+
+    // set roles settings
+    _starter_set_roles();
+
+    // set dates formats
+    _starter_set_dates_formats();
+
+    // set core and contrib variables
+    _starter_set_variables();
+
+    // Update the menu router information.
+    menu_rebuild();
+
+    // ignore any rebuild messages
+    node_access_needs_rebuild(FALSE);
+
+    // ignore any other install messages
+    drupal_get_messages();
+}
+
+function _starter_set_language() {
+    include_once DRUPAL_ROOT . '/includes/locale.inc';
+    locale_add_language('fr', 'French', 'Français', LANGUAGE_LTR, '', '', true, true);
+}
+
+function _starter_set_theme() {
+
+    // Enable some starter blocks.
+    $default_theme = 'bootstrap';
+    $admin_theme = 'adminimal';
+
+    // disable all themes
+    db_update('system')
+        ->fields(array('status' => 0))
+        ->condition('type', 'theme')
+        ->execute();
+
+    // enable $default_theme
+    db_update('system')
+        ->fields(array('status' => 1))
+        ->condition('type', 'theme')
+        ->condition('name', $default_theme)
+        ->execute();
+
+    // enable $admin_theme
+    db_update('system')
+        ->fields(array('status' => 1))
+        ->condition('type', 'theme')
+        ->condition('name', $admin_theme)
+        ->execute();
+
+    variable_set('theme_default', $default_theme);
+    variable_set('admin_theme', $admin_theme);
+
+    // activate admin theme when editing a node
+    variable_set('node_admin_theme', '1');
+
+    $blocks = array(
+        array(
+            'module' => 'system',
+            'delta' => 'main',
+            'theme' => $default_theme,
+            'status' => 1,
+            'weight' => 0,
+            'region' => 'content',
+            'pages' => '',
+            'cache' => -1,
+        ),
+        array(
+            'module' => 'user',
+            'delta' => 'login',
+            'theme' => $default_theme,
+            'status' => 1,
+            'weight' => 0,
+            'region' => 'sidebar_first',
+            'pages' => '',
+            'cache' => -1,
+        ),
+        array(
+            'module' => 'system',
+            'delta' => 'help',
+            'theme' => $default_theme,
+            'status' => 1,
+            'weight' => -10,
+            'region' => 'content',
+            'pages' => '',
+            'cache' => -1,
+        ),
+        array(
+            'module' => 'system',
+            'delta' => 'main',
+            'theme' => $admin_theme,
+            'status' => 1,
+            'weight' => 0,
+            'region' => 'content',
+            'pages' => '',
+            'cache' => -1,
+        ),
+        array(
+            'module' => 'system',
+            'delta' => 'help',
+            'theme' => $admin_theme,
+            'status' => 1,
+            'weight' => 0,
+            'region' => 'help',
+            'pages' => '',
+            'cache' => -1,
+        ),
+    );
+
+    // drop system / user blocks to ensure correct building
+    db_delete('block')->condition('module', 'system')->execute();
+    db_delete('block')->condition('module', 'user')->execute();
+
+    // add in our blocks defined above
+    $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
+    foreach ($blocks as $block) {
+        $query->values($block);
+    }
+    $query->execute();
+}
+
+function _starter_set_roles() {
+
+    // role administrateur
+    $admin_role = new stdClass();
+    $admin_role->name = 'administratreur';
+    $admin_role->machine_name = 'administratreur';
+    $admin_role->weight = 2;
+    user_role_save($admin_role);
+    user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
+    variable_set('user_admin_role', $admin_role->rid);
+    // Assign user 1 the "administrator" role.
+    db_insert('users_roles')
+        ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
+        ->execute();
+
+    // role gestionnaire
+    $gestionnaire_role = new stdClass();
+    $gestionnaire_role->name = 'gestionnaire';
+    $gestionnaire_role->machine_name = 'gestionnaire';
+    $gestionnaire_role->weight = 3;
+    user_role_save($gestionnaire_role);
+
+    // role contributeur
+    $contributeur_role = new stdClass();
+    $contributeur_role->name = 'contributeur';
+    $contributeur_role->machine_name = 'contributeur';
+    $contributeur_role->weight = 4;
+    user_role_save($contributeur_role);
+}
+
+function _starter_set_dates_formats() {
+    db_insert('date_formats')->fields(array('format' => 'd/m/Y','type' => 'custom', 'locked' => 0))->execute();
+    db_insert('date_formats')->fields(array('format' => 'd/m/Y - H:i','type' => 'custom', 'locked' => 0))->execute();
+    db_insert('date_formats')->fields(array('format' => 'l d F Y','type' => 'custom', 'locked' => 0))->execute();
+}
+
+function _starter_set_variables() {
+
+    // admin menu
+    variable_set('admin_menu_cache_client',true);
+    variable_set('admin_menu_components',array(
+        'admin_menu.icon' => true,
+        'admin_menu.menu' => true,
+        'admin_menu.users' => true,
+        'admin_menu.account' => true,
+        'admin_menu.search' => null
+    ));
+    variable_set('admin_menu_devel_modules_skip',array(
+        'admin_devel' => false,
+        'field_ui' => false,
+        'views_ui' => false
+    ));
+    variable_set('admin_menu_margin_top',true);
+    variable_set('admin_menu_position_fixed',true);
+    variable_set('admin_menu_tweak_modules',true);
+    variable_set('admin_menu_tweak_permissions',true);
+    variable_set('admin_menu_tweak_tabs',false);
+
+    // account settings : admin/config/people/accounts
+    variable_set('anonymous','Anonymous');
+    variable_set('user_register', false);
+    variable_set('contact_default_status',false);
+
+    // chosen settings
+    variable_set('chosen_disable_search_threshold','0');
+    variable_set('chosen_jquery_selector','select:visible');
+    variable_set('chosen_minimum_multiple','0');
+    variable_set('chosen_minimum_single','20');
+    variable_set('chosen_minimum_width','200');
+    variable_set('chosen_no_results_text','Aucun résultat');
+    variable_set('chosen_placeholder_text_multiple','Choisir');
+    variable_set('chosen_placeholder_text_single','Choisir');
+    variable_set('chosen_use_theme',1);
+
+    // ctools settings
+    variable_set('ctools_content_all_views',false);
+
+    // developpement/performance : admin/config/development/performance
+    variable_set('cache',false);
+    variable_set('block_cache',false);
+    variable_set('block_cachelifetime',3600);
+    variable_set('page_cache_maximum_age',0);
+    variable_set('preprocess_css',false);
+    variable_set('preprocess_js',false);
+
+    // developpement/logging et errors : admin/config/development/logging
+    variable_set('error_level',2);
+    variable_set('dblog_row_limit',100);
+
+    // media/file system : admin/config/media/file-system
+    variable_set('file_public_path','sites/default/files/public');
+    variable_set('file_private_path','sites/default/files/private');
+    variable_set('file_temporary_path','sites/default/files/tmp');
+    variable_set('file_default_scheme','public');
+
+    // filter format
+    variable_set('filter_fallback_format','plain_text');
+
+    // search
+    variable_set('search_cron_limit',100);
+    variable_set('minimum_word_size',3);
+    variable_set('search_active_modules', array('node' => 'node'));
+    variable_set('search_default_module','node');
+    variable_set('node_rank_relevance',0);
+    variable_set('node_rank_sticky',0);
+    variable_set('node_rank_promote',0);
+
+    // search : admin/config/search/clean-urls
+    variable_set('clean_url',true);
+
+    // regional settings
+    variable_set('date_api_version','7.2');
+    variable_set('date_default_timezone','Europe/Paris');
+    variable_set('date_first_day',true);
+    variable_set('date_api_use_iso8601',true);
+    variable_set('configurable_timezones',false);
+
+    // date format
+    variable_set('date_format_long','l d F Y');
+    variable_set('date_format_medium','d/m/Y - H:i');
+    variable_set('date_format_short','d/m/Y');
+
+    //rss
+    variable_set('feed_description','');
+    variable_set('feed_default_items',10);
+    variable_set('feed_item_length','fulltext');
+
+    // jquery update
+    variable_set('jquery_update_compression_type','min');
+    variable_set('jquery_update_admin_version','1.8');
+    variable_set('jquery_update_jquery_cdn','google');
+    variable_set('jquery_update_jquery_version','1.10');
+
+    // pathauto
+    variable_set('pathauto_transliterate',true);
+
+    // panels page manager
+    variable_set('page_manager_node_edit_disabled',false);
+
+    // menu block
+    variable_set('menu_block_menu_order',array('main-menu' => '','user-menu' => ''));
+    variable_set('menu_block_suppress_core',true);
+
+    // special menu items
+    variable_set('special_menu_items_nolink_tag','<a>');
+    variable_set('special_menu_items_separator_tag','<span>');
+    variable_set('special_menu_items_separator_value','<hr>');
+}
+
+function _starter_create_folders() {
+    @mkdir('sites/default/files/tmp');
+    @mkdir('sites/default/files/public');
+    @mkdir('sites/default/files/public/media');
+    @mkdir('sites/default/files/private');
+}
