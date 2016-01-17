@@ -50,6 +50,10 @@ class HyxLIvreMigration extends HyxNodeMigration {
     $this->addFieldMapping('field_fichier', 'field_product_extrait')->sourceMigration('File');
     $this->addFieldMapping('field_fichier:file_class')->defaultValue('MigrateFileFid');
 
+    // product reference
+    $this->addFieldMapping('field_produit', 'nid')->sourceMigration('HyxProduct');
+
     // ouvrages similaires
+
   }
 }
