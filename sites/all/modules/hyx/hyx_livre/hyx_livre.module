@@ -1,0 +1,16 @@
+<?php
+/**
+ * @file
+ * Code for the Livre feature.
+ */
+
+include_once 'hyx_livre.features.inc';
+
+/**
+ * Implement hook_preprocess_node
+ */
+function hyx_livre_preprocess_node(&$variables) {
+    if($variables['node']->type == 'livre') {
+        $variables['theme_hook_suggestions'][] = 'node__'.$variables['node']->type.'__'.$variables['view_mode'];
+    }
+}
