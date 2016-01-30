@@ -1,6 +1,58 @@
 /**
  * Styles for the hyx theme.
  */
+
+a {
+    color: #00B1F2;
+}
+
 .field-name-field-image img {
     border: 1px solid #000000;
+}
+.navbar{
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+
+.breadcrumb {
+    background-color: transparent;
+    color: #fff;
+    margin-bottom: 10px;
+    padding-left: 0;
+}
+
+.breadcrumb a, .breadcrumb .active {
+    color: #fff;
+}
+
+.banner {
+    background-color: #333A40;
+    padding: 10px 0 0px 0;
+    color: #fff;
+}
+
+.nav-tabs {
+    margin-top: 20px;
+}
+
+.banner h1 {
+    color: #fff;
+    border: 0;
+}
+
+.wrapper-footer {
+    background-color: #333A40;
+    padding: 20px 0;
+    color: #A2A3A5;
+    margin-top: 40px;
+}
+
+.wrapper-footer h2 {
+    font-size: 1.4em;
+    color: #FFFFFF;
+}
+.footer {
+    background-color: #2A2F33;
+    margin-top: 0;
+    border-top: 0;
 }
