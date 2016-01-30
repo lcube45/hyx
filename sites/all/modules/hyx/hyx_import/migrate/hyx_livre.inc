@@ -3,7 +3,7 @@ class HyxLIvreMigration extends HyxNodeMigration {
   public function __construct(array $arguments) {
     parent::__construct($arguments);
 
-    $this->addFieldMapping('field_soustitre', 'field_sous_titre');
+    $this->addFieldMapping('field_soustitre', 'field_product_soustitre');
     $this->addFieldMapping('body:summary', 'field_product_teaser');
     $this->addFieldMapping('field_thematique', 1)->sourceMigration('Thematique');
     $this->addFieldMapping('field_thematique:source_type')->defaultValue('tid');
