@@ -1,0 +1,16 @@
+name = Commerce Colissimo
+description = Provides a shipping method using Colissimo (French postal service) rates table
+package = Commerce (shipping)
+dependencies[] = commerce
+dependencies[] = commerce_shipping
+dependencies[] = commerce_physical
+dependencies[] = physical
+
+core = 7.x
+
+; Information added by drupal.org packaging script on 2013-09-30
+version = "7.x-1.0-dev+8-dev"
+core = "7.x"
+project = "commerce_colissimo"
+datestamp = "1380560064"
+

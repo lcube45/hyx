@@ -1,0 +1,28 @@
+<?php
+
+/*
+ * @file
+ * Define rates for colissimo shipping service.
+ */
+function commerce_colissimo_public_rates_11_commerce_colissimo_rates_table_info() {
+  $rates_table = array(
+    '2011_COLISSIMO_RECOMMANDE_METROPOLE' => array(
+      'title' => 'Colissimo recommandé Metropole (2011)',
+      'rates_table_callback' => 'commerce_colissimo_public_rates_11_france_metropole_recommande',
+      'recommendation_levels_table_callback' => 'commerce_colissimo_public_rates_11_france_metropole_recommande_recommendation_levels',
+    ),
+    '2011_COLISSIMO_RECOMMANDE_DOM1' => array(
+      'title' => 'Colissimo recommandé Dom 1 (2011)',
+      'rates_table_callback' => 'commerce_colissimo_public_rates_11_om1_recommande',
+      'recommendation_levels_table_callback' => 'commerce_colissimo_public_rates_11_om1_recommande_recommendation_levels',
+    ),
+    '2011_COLISSIMO_RECOMMANDE_DOM2' => array(
+      'title' => 'Colissimo recommandé Dom 2 (2011)',
+      'rates_table_callback' => 'commerce_colissimo_public_rates_11_om2_recommande',
+      'recommendation_levels_table_callback' => 'commerce_colissimo_public_rates_11_om2_recommande_recommendation_levels',
+    ),
+  );
+
+  return $rates_table;
+}
+

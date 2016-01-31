@@ -1,0 +1,528 @@
+<?php
+
+define("MAX_WEIGHT_LIMIT", 30);
+
+/**
+ * @file
+ * Defines an example shipping method for testing and development.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function commerce_colissimo_menu() {
+  $items = array();
+
+  $items['admin/commerce/config/shipping/methods/colissimo/add'] = array(
+    'title' => 'Add a colissimo service',
+    'description' => 'Create a new Colissimo shipping service.',
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('admin/commerce/config/shipping/services/colissimo/add'),
+    'access arguments' => array('administer shipping'),
+    'type' => MENU_LOCAL_TASK,
+    'context' => MENU_CONTEXT_INLINE,
+    'weight' => 10,
+  );
+
+  $items['admin/commerce/config/shipping/services/colissimo/add'] = array(
+    'title' => 'Add a Colissimo service',
+    'description' => 'Create a new Colissimo shipping service.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('commerce_colissimo_service_form', commerce_colissimo_service_new()),
+    'access arguments' => array('administer Colissimo'),
+    'type' => MENU_LOCAL_ACTION,
+    'context' => MENU_CONTEXT_PAGE,
+    'file' => 'includes/commerce_colissimo.admin.inc',
+  );
+
+  foreach (commerce_shipping_services('colissimo') as $name => $shipping_service) {
+    // Convert underscores to hyphens for the menu item argument.
+    $service_name_arg = 'colissimo-' . strtr($name, '_', '-');
+
+    $items['admin/commerce/config/shipping/services/' . $service_name_arg . '/edit'] = array(
+      'title' => 'Edit',
+      'description' => 'Edit the Colissimo service.',
+      'page callback' => 'commerce_colissimo_service_edit_page',
+      'page arguments' => array($name),
+      'access arguments' => array('administer Colissimo'),
+      'type' => MENU_LOCAL_TASK,
+      'context' => MENU_CONTEXT_INLINE,
+      'weight' => 0,
+      'file' => 'includes/commerce_colissimo.admin.inc',
+    );
+
+    $items['admin/commerce/config/shipping/services/' . $service_name_arg . '/delete'] = array(
+      'title' => 'Delete',
+      'description' => 'Delete the Colissimo service.',
+      'page callback' => 'commerce_colissimo_service_delete_page',
+      'page arguments' => array($name),
+      'access arguments' => array('administer Colissimo'),
+      'type' => MENU_LOCAL_TASK,
+      'context' => MENU_CONTEXT_INLINE,
+      'weight' => 10,
+      'file' => 'includes/commerce_colissimo.admin.inc',
+    );
+  }
+
+  return $items;
+}
+
+function commerce_colissimo_get_rates_table($service_key_name) {
+  $services_rates_table = commerce_colissimo_services_rates_tables();
+  if (!empty($services_rates_table[$service_key_name]['rates_table_callback'])) {
+    $modules = module_implements('commerce_colissimo_rates_table_info');
+    foreach ($modules as $module) {
+      module_load_include('inc', $module);
+    }
+    return call_user_func($services_rates_table[$service_key_name]['rates_table_callback']);
+  }
+  else {
+    return array();
+  }
+}
+
+function commerce_colissimo_get_recommendations_table($service_key_name) {
+  $services_rates_table = commerce_colissimo_services_rates_tables();
+  if (!empty($services_rates_table[$service_key_name]['recommendation_levels_table_callback'])) {
+    $modules = module_implements('commerce_colissimo_rates_table_info');
+    foreach ($modules as $module) {
+      module_load_include('inc', $module);
+    }
+    return call_user_func($services_rates_table[$service_key_name]['recommendation_levels_table_callback']);
+  }
+  else {
+    return array();
+  }
+}
+
+/**
+ * Defines the available shipping rates table with their callback to build the table
+ * @return array
+ */
+function commerce_colissimo_services_rates_tables() {
+  $modules = module_implements('commerce_colissimo_rates_table_info');
+  foreach ($modules as $module) {
+    module_load_include('inc', $module);
+  }
+
+  $services_rates_table = module_invoke_all('commerce_colissimo_rates_table_info');
+  return $services_rates_table;
+}
+
+function commerce_colissimo_services_rates_tables_options() {
+  $options = array();
+  foreach (commerce_colissimo_services_rates_tables() as $key => $rate) {
+    $options[$key] = $rate['title'];
+  }
+
+  return $options;
+}
+
+function commerce_colissimo_get_recommendation_limits($service_key_name) {
+  if (empty($service_key_name))
+    return NULL;
+
+  $rates = commerce_colissimo_services_rates_tables();
+  if (!empty($rates[$service_key_name]['recommendation_levels_table_callback'])) {
+    //return call_user_func($rates[$service_key_name]['recommendation_levels_table_callback']);
+    return commerce_colissimo_get_recommendations_table($service_key_name);
+  }
+  else {
+    return NULL;
+  }
+}
+
+function commerce_colissimo_get_recommendation_limits_options($service_key_name) {
+  $options = array();
+  $recommendation_levels = commerce_colissimo_get_recommendation_limits($service_key_name);
+  if (!empty($recommendation_levels)) {
+    $options['AUTO'] = 'Automatic (based on order total)';
+    foreach ($recommendation_levels as $key => $reco) {
+      $options[$key] = "Forced to " . $key . " (" . $reco / 100 . "€)";
+    }
+  }
+  return $options;
+}
+
+function commerce_colissimo_get_smart_calculation_modes() {
+  return array(
+    "NONE" => array(
+      'title' => 'None',
+      'description' => 'Default behavior : use the rate for the heaviest parcel (' . MAX_WEIGHT_LIMIT . ') and follow the Recommendation level setting',
+      'callback' => 'commerce_colissimo_standard_calculation',
+      ),
+    "WEIGHT" => array(
+      'title' => 'Overweight order : Optimize weight distribution',
+      'description' => 'Optimize the weight distribution over multiple parcels, and follow the Recommendation level setting ',
+      'callback' => 'commerce_colissimo_smart_calculation_by_weight',
+    ),
+  );
+}
+
+function commerce_colissimo_get_smart_calculation_modes_option() {
+  $options = array();
+  foreach (commerce_colissimo_get_smart_calculation_modes() as $key => $reco) {
+    $options[$key] = $reco['description'];
+  }
+  return $options;
+}
+
+/**
+ * Returns an initialized Colissimo shipping service array for forms.
+ */
+function commerce_colissimo_service_new() {
+  return array(
+    'name' => '',
+    'title' => '',
+    'display_title' => '',
+    'description' => '',
+    'rules_component' => TRUE,
+    'service_key_name' => '',
+    'data' => array(),
+    'is_new' => TRUE,
+  );
+}
+
+/**
+ * Saves a Colissimo service to the database.
+ *
+ * @param $shipping_service
+ *   The Colissimo shipping service to save.
+ * @param $skip_reset
+ *   Boolean indicating whether or not this save should result in shipping
+ *   services being reset and the menu being rebuilt; defaults to FALSE. This is
+ *   useful when you intend to perform many saves at once, as menu rebuilding is
+ *   very costly in terms of performance.
+ *
+ * @return
+ *   The return value of the call to drupal_write_record() to save the Colissimo
+ *   service; either FALSE on failure or SAVED_NEW or SAVED_UPDATED indicating
+ *   the type of query performed to save the Colissimo service.
+ */
+function commerce_colissimo_service_save($shipping_service, $skip_reset = FALSE) {
+  $op = drupal_write_record('commerce_colissimo_service', $shipping_service, empty($shipping_service['is_new']) ? 'name' : array());
+
+  // If this is a new Colissimo service and the insert did not fail...
+  if (!empty($shipping_service['is_new']) && $op !== FALSE) {
+    // Notify other modules that a new tax Colissimo service has been created.
+    module_invoke_all('commerce_colissimo_service_insert', $shipping_service, $skip_reset);
+  }
+  elseif ($op !== FALSE) {
+    // Notify other modules that an existing Colissimo service has been updated.
+    module_invoke_all('commerce_colissimo_service_update', $shipping_service, $skip_reset);
+  }
+
+  // Clear the necessary caches and rebuild the menu items.
+  if (!$skip_reset) {
+    commerce_shipping_services_reset();
+    entity_defaults_rebuild();
+    rules_clear_cache(TRUE);
+    menu_rebuild();
+  }
+
+  return $op;
+}
+
+/**
+ * Deletes a Colissimo service.
+ *
+ * @param $name
+ *   The machine-name of the Colissimo service.
+ * @param $skip_reset
+ *   Boolean indicating whether or not this delete should result in shipping
+ *   services being reset and the menu being rebuilt; defaults to FALSE. This is
+ *   useful when you intend to perform many deletions at once, as menu
+ *   rebuilding is very costly in terms of performance.
+ */
+function commerce_colissimo_service_delete($name, $skip_reset = FALSE) {
+  $shipping_service = commerce_shipping_service_load($name);
+
+  db_delete('commerce_colissimo_service')
+    ->condition('name', $name)
+    ->execute();
+
+  rules_config_delete(array('commerce_shipping_service_' . $name));
+
+  // Clear the necessary caches and rebuild the menu items.
+  if (!$skip_reset) {
+    commerce_shipping_services_reset();
+    entity_defaults_rebuild();
+    rules_clear_cache(TRUE);
+    menu_rebuild();
+  }
+
+  // Notify other modules that this Colissimo service has been deleted.
+  module_invoke_all('commerce_colissimo_service_delete', $shipping_service, $skip_reset);
+}
+
+/**
+ * Implements hook_commerce_shipping_method_info().
+ */
+function commerce_colissimo_commerce_shipping_method_info() {
+  $shipping_methods = array();
+
+  $shipping_methods['colissimo'] = array(
+    'title' => t('Colissimo shipping method'),
+    'description' => t('Use Colissimo table rates.'),
+  );
+
+  return $shipping_methods;
+}
+
+/**
+ * Implements hook_commerce_shipping_service_info().
+ */
+function commerce_colissimo_commerce_shipping_service_info() {
+  $services = array();
+
+  // Look for Colissimo services currently defined in the database.
+  $result = db_query('SELECT * FROM {commerce_colissimo_service}')->fetchAllAssoc('name', PDO::FETCH_ASSOC);
+
+  if (!empty($result)) {
+    foreach ($result as $name => $service) {
+      // Unserialize the data array for the service.
+      $data = !empty($service['data']) ? unserialize($service['data']) : '';
+      $price_component_type = 'colissimo_' . $name;
+
+      // Add the full service array to our return value.
+      $services[$name] = array(
+        'title' => $service['title'],
+        'display_title' => !empty($service['display_title']) ? $service['display_title'] : $service['title'],
+        'description' => $service['description'],
+        'shipping_method' => 'colissimo',
+        'rules_component' => !empty($service['rules_component']),
+        //'price_component' => $price_component_type,
+        'price_component' => 'shipping',
+        'callbacks' => array(
+          'rate' => 'commerce_colissimo_service_rate',
+        ),
+        'service_key_name' => $service['service_key_name'],
+        'data' => $data,
+      );
+    }
+  }
+
+  return $services;
+}
+
+/**
+ * Shipping service callback: returns a base price array for a shipping service
+ * calculated for the given order.
+ */
+function commerce_colissimo_service_rate($shipping_service, $order) {
+  $settings = $shipping_service['data'];
+  $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+
+  //Calculate the total weight of the order
+  $order_total_weight = commerce_physical_order_weight($order, 'kg');
+  $order_total_weight = $order_total_weight['weight'];
+
+  //Calculate the value of the order
+  $order_total_amount = $order_wrapper->commerce_order_total->value();
+  $order_total_amount = $order_total_amount['amount'];
+
+  //$rate_service_info = commerce_colissimo_get_rates_table($shipping_service['service_key_name']);
+  $rate_service_info = $shipping_service['service_key_name'];
+  $shipping_price = commerce_colissimo_calculate_shipping_price_wrapper($order_total_weight, $order_total_amount, $rate_service_info, $settings);
+
+  //Create the price component
+  $shipping_price = array(
+    'amount' => $shipping_price,
+    'currency_code' => commerce_default_currency(),
+    'data' => array(),
+  );
+
+  if (!empty($settings['include_tax']) && $tax_rate = commerce_tax_rate_load($settings['include_tax'])) {
+    // Reverse apply the tax.
+    $tax_amount = $shipping_price['amount'] - ($shipping_price['amount'] / (1 + $tax_rate['rate']));
+    $tax_amount = commerce_tax_rate_round_amount($tax_rate, $tax_amount);
+
+    // Add a base price to the data array.
+    $component = array(
+      'amount' => $shipping_price['amount'] - $tax_amount,
+      'currency_code' => commerce_default_currency(),
+      'data' => array(),
+    );
+    $shipping_price['data'] = commerce_price_component_add($shipping_price, $shipping_service['price_component'], $component, TRUE, FALSE);
+
+    // Add the tax to the data array.
+    $component['amount'] = $tax_amount;
+    $component['data']['tax_rate'] = $tax_rate;
+    $shipping_price['data'] = commerce_price_component_add($shipping_price, $tax_rate['price_component'], $component, TRUE);
+  }
+
+  return $shipping_price;
+}
+
+/**
+ * Calculate the expected shipping cost based on the total order amount and weight
+ * and the settings of the current shipping service
+ * @param  $order_total_weight
+ * @param  $order_total_amount
+ * @param  $service_key_name
+ *
+ * @return int
+ *  The total shipping cost in EUR, minor unit
+ */
+function commerce_colissimo_calculate_shipping_price_wrapper($order_total_weight, $order_total_amount, $service_key_name, $settings = array()) {
+  if (commerce_colissimo_order_is_out_of_weight_limit($order_total_weight) && $settings['smart_calculation'] == 'WEIGHT') {
+    $shipping_cost = commerce_colissimo_smart_calculation_by_weight($order_total_weight, $order_total_amount, $service_key_name, $settings);
+  }
+  else {
+    $shipping_cost = commerce_colissimo_standard_calculation($order_total_weight, $order_total_amount, $service_key_name, $settings);
+  }
+  return $shipping_cost;
+}
+
+/**
+ * Calculate the shipping cost in an optimal way based on the total weight.
+ * The function commerce_colissimo_smart_calculation_by_weight() should be called prior to this function
+ * @param  $order_total_weight
+ * @param  $order_total_amount
+ * @param  $service_key_name
+ * @param  $settings
+ *
+ * @return int
+ *   The shipping cost in EUR, minor unit
+ */
+function commerce_colissimo_smart_calculation_by_weight($order_total_weight, $order_total_amount, $service_key_name, $settings = array()) {
+  //We break down the order into multiple parcels, and sum up the costs
+  $parcels_needed = $order_total_weight / MAX_WEIGHT_LIMIT;
+
+  //Define how many parcel of MAX_WEIGHT_LIMIT we need (round the count of parcels needed)
+  $max_weight_parcels_needed = floor($parcels_needed);
+
+  //Define the total amount for each parcel of MAX_WEIGHT_LIMIT in a proportional way by weight
+  $max_weight_parcels_weight_ratio = MAX_WEIGHT_LIMIT / $order_total_weight;
+  $max_weight_parcels_total_amount = $order_total_amount * $max_weight_parcels_weight_ratio;
+
+  //Define if we'll need one last parcel that will be < than MAX_WEIGHT_LIMIT
+  $extra_parcel_needed = $max_weight_parcels_needed < $parcels_needed ? 1 : 0;
+
+  //If we need the last parcel, define its weight and total amount
+  if ($extra_parcel_needed) {
+    //Define the total weight of the extra parcel
+    $extra_parcel_weight = $order_total_weight - ($max_weight_parcels_needed * MAX_WEIGHT_LIMIT);
+    //Define the total amount of the extra parcel
+    $extra_parcel_weight_ratio = $extra_parcel_weight / $order_total_weight;
+    $extra_parcel_amount = $order_total_amount * $extra_parcel_weight_ratio;
+  }
+
+  //Sum up the total of shipping cost
+  $shipping_cost = commerce_colissimo_standard_calculation(MAX_WEIGHT_LIMIT, $max_weight_parcels_total_amount, $service_key_name, $settings) * $max_weight_parcels_needed;
+  if ($extra_parcel_needed) {
+    $shipping_cost += commerce_colissimo_standard_calculation($extra_parcel_weight, $extra_parcel_amount, $service_key_name, $settings);
+  }
+
+  return $shipping_cost;
+}
+
+/**
+ * Finds the adequate rate based on the order's total weight and amount.
+ * @param  $order_total_weight
+ *  Order's total weight value in kg
+ * @param  $order_total_amount
+ *  Order's total amount in EUR, minor unit
+ * @param $service_key_name
+ *
+ * @return
+ *  The shipping cost in minor EUR unit. If the total weight given is out of bound, the most expensive price will be applied
+ */
+function commerce_colissimo_standard_calculation($order_total_weight, $order_total_amount, $service_key_name, $settings = array()) {
+
+  //$colissimo_rate = call_user_func($rate_service_info['rates_table_callback']);
+  $colissimo_rate =  commerce_colissimo_get_rates_table($service_key_name);
+
+  //$recommendation_levels = !empty($rate_service_info['recommendation_levels_table_callback']) ? call_user_func($rate_service_info['recommendation_levels_table_callback']) : NULL;
+  $recommendation_levels = commerce_colissimo_get_recommendations_table($service_key_name);
+
+  $shipping_cost = "";
+  foreach ($colissimo_rate as $i => $rate) {
+    if ($order_total_weight <= $rate['weight']) {
+      //This rate matches the weight limit as it is
+      //enough to cover the order's total weight (inferior or equal)
+      //If the price table has a recommentation level, we find the adequate one
+      if (isset($rate['reco'])) {
+        //Check if the "recommendation" level is forced by the shipping service setting
+        if ($settings['recommendation'] == 'AUTO') {
+          //The recommandation level haven't been forced
+          //We now check what "recommendation" level should be applied
+          foreach ($rate['reco'] as $amount_limit => $price) {
+            //Check if the order amount is less than the current "recommendation" limit
+            if ($order_total_amount <= $amount_limit) {
+              $shipping_cost = $price;
+              break;
+            }
+          }
+          //If no "recommendation" level has been found, we apply the highest (last) found
+          //Because the weight criteria match, but the order total amount is out of bounds
+          if ($shipping_cost == "") {
+            $shipping_cost = $price;
+          }
+        }
+        else {
+          //The "recommendation" level has been forced
+          $reco_level = $settings['recommendation'];
+          $reco_limit = $recommendation_levels[$reco_level];
+          $shipping_cost = $rate['reco'][$reco_limit];
+          break;
+        }
+      }
+      else { //If the price table has no recommendation level, we apply the first price
+        //in $rate['price']
+        $shipping_cost = $rate['price'];
+      }
+    }
+    //If a price has been found, we exit the foreach now
+    if ($shipping_cost != "") {
+      break;
+    }
+  }
+
+  //If no shipping_cost has been found, it means that the current order is out of bounds for the weight
+  //The current behavior is to take the most rate that matches the maximum weight, with the right recommendation level
+  if ($shipping_cost == "") {
+    //Check if there are recommendation level
+    if (isset($rate['reco'])) {
+      //Check if the "recommendation" level is forced by the shipping service setting
+      if ($settings['recommendation'] == 'AUTO') {
+        //The recommandation level haven't been forced
+        foreach ($rate['reco'] as $amount_limit => $price) { //Using the latest $rate found as it is the one for the most heavy parcel
+          //Check if the order amount is less than the current "recommendation" limit
+          if ($order_total_amount <= $amount_limit) {
+            $shipping_cost = $price;
+            break;
+          }
+        }
+        //If no "recommendation" level has been found, we apply the highest (last) found
+        //Because the weight criteria match, but the order total amount is out of bounds
+        if ($shipping_cost == "") {
+          $shipping_cost = $price;
+        }
+      }
+      else {
+        //The "recommendation" level has been forced
+        //Get the table of recommendation
+        $reco_level = $settings['recommendation'];
+        $reco_limit = $recommendation_levels[$reco_level];
+        $shipping_cost = $rate['reco'][$reco_limit];
+      }
+    }
+    else {
+      //If the weight is out of bound and there is no recommendation setting
+      //We apply the most expensive rate
+      $shipping_cost = $rate['price'];
+    }
+  }
+
+  return $shipping_cost;
+}
+
+/**
+ * Defines whether an order is out of weight limit bounds
+ * @param  $order_total_weight
+ * @return bool
+ */
+function commerce_colissimo_order_is_out_of_weight_limit($order_total_weight) {
+  return $order_total_weight > MAX_WEIGHT_LIMIT;
+}

@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * @file
+ * Defines the database schema for Colissimo shipping services.
+ */
+
+
+/**
+ * Implements hook_schema().
+ */
+function commerce_colissimo_schema() {
+  $schema = array();
+
+  $schema['commerce_colissimo_service'] = array(
+    'description' => 'Stores information about shipping services created through the Colissimo module.',
+    'fields' => array(
+      'name' => array(
+        'description' => 'The machine-name of the Colissimo service.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'title' => array(
+        'description' => 'The human-readable title of the Colissimo service.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'display_title' => array(
+        'description' => 'The title of the Colissimo service displayed to customers.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'description' => array(
+        'description' => 'A brief description of the Colissimo service.',
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'medium',
+      ),
+      //'rate_table' => array(
+      'service_key_name' => array(
+        'description' => 'Name of the service declared by a hook to use.',
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'medium',
+      ),
+      'rules_component' => array(
+        'description' => 'Boolean indicating whether or not this service should have a default Rules component for enabling it for orders.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'data' => array(
+        'description' => 'A serialized array of additional data.',
+        'type' => 'text',
+        'size' => 'big',
+        'serialize' => TRUE,
+      ),
+    ),
+    'primary key' => array('name'),
+  );
+
+  return $schema;
+}
+
+function commerce_colissimo_uninstall() {
+  //db_drop_table('commerce_colissimo_service');
+}
+
+/**
+ * Rename field "rate_table" to "service_key_name" in database table commerce_colissimo_service.
+ */
+function commerce_colissimo_update_7100() {
+
+  db_change_field('commerce_colissimo_service', 'rate_table', 'service_key_name',
+    array(
+      'description' => 'Name of the service declared by a hook to use.',
+      'type' => 'text',
+      'not null' => TRUE,
+      'size' => 'medium',
+      )
+    );
+
+  return t('Database commerce_colissimo_service table field "rate_table" has been renamed to name "service_key_name".');
+}
+
+

@@ -1,0 +1,85 @@
+<?php
+
+function commerce_colissimo_entreprise_rates_11_commerce_colissimo_rates_table_info() {
+  $rates_table = array(
+    '2011_ENTREPRISE_COLISSIMO_NATIONALE_ACCESS_F' => array(
+      'title' => 'Colissimo Entreprise nationale access F (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_nationale_access_f',
+      'recommendation_levels_table_callback' => '',
+    ),
+    '2011_ENTREPRISE_COLISSIMO_NATIONALE_EXPERT_F' => array(
+      'title' => 'Colissimo Entreprise nationale expert F (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_nationale_expert_f',
+      'recommendation_levels_table_callback' => '',
+    ),
+    '2011_ENTREPRISE_COLISSIMO_NATIONALE_SERVICES_F' => array(
+      'title' => 'Colissimo Entreprise nationale services F (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_nationale_services_f',
+      'recommendation_levels_table_callback' => '',
+    ),
+
+    '2011_ENTREPRISE_COLISSIMO_ACCESS_OM1' => array(
+      'title' => 'Colissimo Entreprise Outre-mer 1 access (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_access_om1',
+      'recommendation_levels_table_callback' => '',
+    ),
+    '2011_ENTREPRISE_COLISSIMO_ACCESS_OM2' => array(
+      'title' => 'Colissimo Entreprise Outre-mer 2 access (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_access_om2',
+      'recommendation_levels_table_callback' => '',
+    ),
+    '2011_ENTREPRISE_COLISSIMO_EXPERT_OM2' => array(
+      'title' => 'Colissimo Entreprise Outre-mer 1 expert (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_expert_om1',
+      'recommendation_levels_table_callback' => '',
+    ),
+    'ENTREPRISE_COLISSIMO_EXPERT_OM2_2011' => array(
+      'title' => 'Colissimo Entreprise Outre-mer 2 expert (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_expert_om2',
+      'recommendation_levels_table_callback' => '',
+    ),
+
+    '2011_ENTREPRISE_COLISSIMO_EXPERT_INTER_Z1' => array(
+      'title' => 'Colissimo Entreprise International expert zone 1 (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_expert_i_zone1',
+      'recommendation_levels_table_callback' => '',
+    ),
+    'ENTREPRISE_COLISSIMO_EXPERT_INTER_Z2' => array(
+      'title' => 'Colissimo Entreprise International expert zone 2 (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_expert_i_zone2',
+      'recommendation_levels_table_callback' => '',
+    ),
+    'ENTREPRISE_COLISSIMO_EXPERT_INTER_Z3' => array(
+      'title' => 'Colissimo Entreprise International expert zone 3 (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_expert_i_zone3',
+      'recommendation_levels_table_callback' => '',
+    ),
+    '2011_ENTREPRISE_COLISSIMO_EXPERT_INTER_Z4' => array(
+      'title' => 'Colissimo Entreprise International expert zone 4 (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_expert_i_zone4',
+      'recommendation_levels_table_callback' => '',
+    ),
+    '2011_ENTREPRISE_COLISSIMO_EXPERT_INTER_Z5' => array(
+      'title' => 'Colissimo Entreprise International expert zone 5 (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_expert_i_zone5',
+      'recommendation_levels_table_callback' => '',
+    ),
+    '2011_ENTREPRISE_COLISSIMO_EXPERT_INTER_Z6' => array(
+      'title' => 'Colissimo Entreprise International expert zone 6 (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_expert_i_zone6',
+      'recommendation_levels_table_callback' => '',
+    ),
+    '2011_ENTREPRISE_COLISSIMO_EXPERT_INTER_Z7' => array(
+      'title' => 'Colissimo Entreprise International expert zone 7 (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_expert_i_zone7',
+      'recommendation_levels_table_callback' => '',
+    ),
+    '2011_ENTREPRISE_COLISSIMO_EXPERT_INTER_Z8' => array(
+      'title' => 'Colissimo Entreprise International expert zone 8 (2011)',
+      'rates_table_callback' => 'commerce_colissimo_entreprise_rates_11_entreprise_colissimo_expert_i_zone8',
+      'recommendation_levels_table_callback' => '',
+    ),
+  );
+
+  return $rates_table;
+}
