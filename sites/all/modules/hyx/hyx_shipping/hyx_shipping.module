@@ -1,0 +1,28 @@
+<?php
+
+function hyx_shipping_commerce_colissimo_rates_table_info() {
+  $rates_table = array(
+    'HYX_TARIF_ZONE_FRANCE' => array(
+      'title' => 'Tarifs expédition zone FRANCE',
+      'rates_table_callback' => 'hyx_tarif_zone_france',
+      'recommendation_levels_table_callback' => '',
+    ),
+    'HYX_TARIF_ZONE_A' => array(
+      'title' => 'Tarifs expédition zone A',
+      'rates_table_callback' => 'hyx_tarif_zone_a',
+      'recommendation_levels_table_callback' => '',
+    ),
+    'HYX_TARIF_ZONE_B' => array(
+      'title' => 'Tarifs expédition zone B',
+      'rates_table_callback' => 'hyx_tarif_zone_b',
+      'recommendation_levels_table_callback' => '',
+    ),
+    'HYX_TARIF_ZONE_C' => array(
+      'title' => 'Tarifs expédition zone C',
+      'rates_table_callback' => 'hyx_tarif_zone_c',
+      'recommendation_levels_table_callback' => '',
+    ),
+  );
+
+  return $rates_table;
+}

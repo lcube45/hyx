@@ -1,0 +1,12 @@
+name = HYX shpping rates (weight/country/zone)
+description = Grilles de tarifs EDITIONS HYX
+package = HYX
+dependencies[] = commerce_colissimo
+dependencies[] = commerce
+dependencies[] = commerce_shipping
+dependencies[] = commerce_physical
+dependencies[] = physical
+
+files[] = hyx_shipping.inc
+
+core = 7.x
