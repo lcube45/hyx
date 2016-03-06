@@ -6,8 +6,8 @@ core = 7.x
 ; ========================================
 ; Regions
 ; ========================================
-regions[navigation] = Navigation
 regions[header] = Top Bar
+regions[navigation] = Navigation
 regions[highlighted] = Highlighted
 regions[help] = Help
 regions[content] = Content
@@ -26,3 +26,5 @@ regions[page_bottom] = Page bottom
 ; Stylesheets
 ; ========================================
 stylesheets[all][] = css/style.css
+stylesheets[all][] = css/yamm.css
+

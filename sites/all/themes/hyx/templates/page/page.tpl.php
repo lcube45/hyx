@@ -73,6 +73,16 @@
  * @ingroup themeable
  */
 ?>
+<!-- start top bar -->
+<?php if (!empty($page['header'])): ?>
+  <div class="<?php print $container_class; ?>">
+    <?php print render($page['header']); ?>
+    <?php print render($menu_user); ?>
+  </div>
+<?php endif; ?>
+<!-- end top bar -->
+
+<!-- start navigation -->
 <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
     <div class="<?php print $container_class; ?>">
         <div class="navbar-header">
@@ -105,6 +115,19 @@
                     <?php if (!empty($primary_nav)): ?>
                         <?php print render($primary_nav); ?>
                     <?php endif; ?>
+
+                    <?php print render($search_block_form['content']); ?>
+
+                    <ul class="menu nav navbar-nav navbar-right">
+
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <span class="caret"></span></a>
+                        <div class="dropdown-menu">
+                          cart
+                        </div>
+                      </li>
+                    </ul>
+
                     <?php if (!empty($secondary_nav)): ?>
                         <?php print render($secondary_nav); ?>
                     <?php endif; ?>
@@ -116,7 +139,9 @@
         <?php endif; ?>
     </div>
 </header>
+<!-- end navigation -->
 
+<!-- start banner -->
 <div class="banner">
     <div class="<?php print $container_class; ?>">
         <?php if (!empty($breadcrumb)): print $breadcrumb; endif;?>
@@ -127,22 +152,12 @@
         <?php print render($title_suffix); ?>
     </div>
 </div>
+<!-- end banner -->
 
+<!-- start main content -->
 <div class="main-container <?php print $container_class; ?>">
 
-    <header role="banner" id="page-header">
-            <p class="lead"><?php print $site_slogan; ?></p>
-
-        <?php print render($page['header']); ?>
-    </header> <!-- /#page-header -->
-
     <div class="row">
-
-        <?php if (!empty($page['sidebar_first'])): ?>
-            <aside class="col-sm-3" role="complementary">
-                <?php print render($page['sidebar_first']); ?>
-            </aside>  <!-- /#sidebar-first -->
-        <?php endif; ?>
 
         <section<?php print $content_column_class; ?>>
             <?php if (!empty($page['highlighted'])): ?>
@@ -162,14 +177,9 @@
             <?php print render($page['content']); ?>
         </section>
 
-        <?php if (!empty($page['sidebar_second'])): ?>
-            <aside class="col-sm-3" role="complementary">
-                <?php print render($page['sidebar_second']); ?>
-            </aside>  <!-- /#sidebar-second -->
-        <?php endif; ?>
-
     </div>
 </div>
+<!-- end main content -->
 
 <!-- start 3 blocks footer -->
 <div class="wrapper-footer">
@@ -197,10 +207,12 @@
 </div>
 <!-- end 3 blocks footer -->
 
+<!-- start menu footer -->
 <?php if (!empty($page['footer'])): ?>
 <footer class="footer">
-    <div class=" <?php print $container_class; ?>">
+    <div class="<?php print $container_class; ?>">
         <?php print render($page['footer']); ?>
     </div>
 </footer>
 <?php endif; ?>
+<!--end menu footer -->
