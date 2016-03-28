@@ -59,6 +59,12 @@ function hyx_import_migrate_api() {
       'destination_vocabulary' => 'thematique',
       'group_name' => 'hyx',
     ),
+    'Categorie' => array(
+      'description' => t('Migration of Blog category terms from Drupal 6'),
+      'source_vocabulary' => '5',  // D6 Vocabulary ID
+      'destination_vocabulary' => 'categorie',
+      'group_name' => 'hyx',
+    ),
   );
   /**
    * Again, we're using the migrate_d2d class directly.
@@ -92,6 +98,12 @@ function hyx_import_migrate_api() {
       'description' => t('Migration of livre nodes from Drupal 6'),
       'source_type' => 'product',
       'destination_type' => 'livre',
+    ),
+    'Blog' => array(
+      'class_name' => 'HyxBlogMigration',
+      'description' => t('Migration of blog nodes from Drupal 6'),
+      'source_type' => 'blog',
+      'destination_type' => 'blog',
     ),
   );
 

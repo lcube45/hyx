@@ -7,4 +7,5 @@ files[] = migrate/hyx_product.inc
 files[] = migrate/hyx_node.inc
 files[] = migrate/hyx_auteur.inc
 files[] = migrate/hyx_livre.inc
+files[] = migrate/hyx_blog.inc
 files[] = migrate/hyx_file.inc
