@@ -74,12 +74,15 @@
  */
 ?>
 <!-- start top bar -->
-<?php if (!empty($page['header'])): ?>
-  <div class="<?php print $container_class; ?>">
-    <?php print render($page['header']); ?>
-    <?php print render($menu_user); ?>
-  </div>
-<?php endif; ?>
+<div class="<?php print $container_class; ?>">
+    <div class="row">
+        <div class="col-md-offset-9">
+            <?php print $locale['content']; ?>
+            <?php print render($menu_user); ?>
+            <?php print t('Shopping cart'); ?> (<?php print $cart['content']; ?>)
+        </div>
+    </div>
+</div>
 <!-- end top bar -->
 
 <!-- start navigation -->
@@ -117,16 +120,6 @@
                     <?php endif; ?>
 
                     <?php print render($search_block_form['content']); ?>
-
-                    <ul class="menu nav navbar-nav navbar-right">
-
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <span class="caret"></span></a>
-                        <div class="dropdown-menu">
-                          cart
-                        </div>
-                      </li>
-                    </ul>
 
                     <?php if (!empty($secondary_nav)): ?>
                         <?php print render($secondary_nav); ?>

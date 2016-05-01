@@ -1,0 +1,4 @@
+name = HYX content
+description = Divers éléments de contenus (block, node,...)
+package = HYX
+core = 7.x

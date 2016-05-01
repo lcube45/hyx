@@ -1,7 +1,6 @@
 <?php
 
 class HyxBlogMigration extends HyxNodeMigration {
-
     public function __construct(array $arguments) {
         parent::__construct($arguments);
 

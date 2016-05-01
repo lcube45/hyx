@@ -2,6 +2,12 @@
 
 function hyx_preprocess_page(&$variables) {
 
+  // block de locale
+  $variables['locale'] = module_invoke('locale', 'block_view', 'language');
+
+  // block panier
+  $variables['cart'] = module_invoke('hyx_content', 'block_view', 'hyx_cart');
+
   // block de recherche
   $variables['search_block_form'] = module_invoke('search_api_page', 'block_view', 'hyxsearchpage');
 
@@ -16,23 +22,12 @@ function hyx_menu_tree__menu_footer(&$variables){
 }
 
 function hyx_menu_tree__user_menu(&$variables){
-  return '<ul class="list-inline pull-right">' . $variables['tree'] . '</ul>';
+  return '<ul class="list-inline">' . $variables['tree'] . '</ul>';
 }
 
 function hyx_links__locale_block(&$variables) {
-  /*
-  $links = array();
-
-  foreach($variables['links'] as $link) {
-    $link['title'] = $link['language']->language;
-    $links[] = $link;
-  }
-
-  $variables['links'] = $links;
-  */
-
   $variables['attributes']['class'][] = 'list-inline';
-  $variables['attributes']['class'][] = 'pull-right';
+  //$variables['attributes']['class'][] = 'pull-right';
   $content = theme_links($variables);
   return $content;
 }

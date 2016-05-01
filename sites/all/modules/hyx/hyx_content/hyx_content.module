@@ -1,0 +1,30 @@
+<?php
+/**
+ * Implements hook_block_info().
+ */
+function hyx_content_block_info() {
+    $blocks = array();
+
+    // Define the basic shopping cart block and hide it on the checkout pages.
+    $blocks['hyx_cart'] = array(
+        'info' => t('Shopping cart'),
+        'cache' => DRUPAL_NO_CACHE,
+        'visibility' => 0,
+    );
+
+    return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function hyx_content_block_view($delta = '') {
+    if($delta == 'hyx_cart') {
+        global $user;
+
+        $order = commerce_cart_order_load($user->uid);
+        $wrapper = entity_metadata_wrapper('commerce_order', $order);
+        $quantite = commerce_line_items_quantity($wrapper->commerce_line_items, commerce_product_line_item_types());
+        return array('subject' => t('Shopping cart'), 'content' => $quantite);
+    }
+}
