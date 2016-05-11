@@ -27,6 +27,8 @@ function hyx_menu_tree__user_menu(&$variables){
 
 function hyx_links__locale_block(&$variables) {
   $variables['attributes']['class'][] = 'list-inline';
+  $variables['links']['en']['title'] = substr($variables['links']['en']['title'],0,2);
+  $variables['links']['fr']['title'] = substr($variables['links']['fr']['title'],0,2);
   //$variables['attributes']['class'][] = 'pull-right';
   $content = theme_links($variables);
   return $content;

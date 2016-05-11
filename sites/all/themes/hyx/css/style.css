@@ -3,15 +3,19 @@
  */
 
 a {
-    color: #00B1F2;
+    color: #53caff;
 }
 
 .field-name-field-image img {
-    border: 1px solid #000000;
+    /*border: 1px solid #000000;*/
 }
 .navbar{
     margin-bottom: 0;
     border-bottom: 0;
+}
+
+.hyx-header ul {
+    margin-top: 30px;
 }
 
 .breadcrumb {
@@ -26,9 +30,9 @@ a {
 }
 
 .banner {
-    background-color: #333A40;
+    //background-color: #333A40;
     padding: 10px 0 0px 0;
-    color: #fff;
+    //color: #fff;
 }
 
 .nav-tabs {
@@ -41,9 +45,9 @@ a {
 }
 
 .wrapper-footer {
-    background-color: #333A40;
+    background-color: #3D3D3C;
     padding: 20px 0;
-    color: #A2A3A5;
+    color: #d6d6d5;
     margin-top: 40px;
 }
 
@@ -52,7 +56,8 @@ a {
     color: #FFFFFF;
 }
 .footer {
-    background-color: #2A2F33;
+    background-color: #333332;
     margin-top: 0;
     border-top: 0;
+    padding-top: 10px;
 }

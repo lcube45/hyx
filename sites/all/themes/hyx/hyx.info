@@ -25,9 +25,10 @@ regions[page_bottom] = Page bottom
 ; ========================================
 ; Stylesheets
 ; ========================================
-stylesheets[all][] = bootstrap/css/bootstrap.min.css
+;stylesheets[all][] = bootstrap/css/bootstrap.min.css
+stylesheets[all][] = css/hyx-style.css
+;stylesheets[all][] = css/yamm.css
 stylesheets[all][] = css/style.css
-stylesheets[all][] = css/yamm.css
 
 ; ========================================
 ; javascripts

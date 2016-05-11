@@ -1,0 +1,4 @@
+name = HYX layout
+description = Panels layout hyx
+package = HYX
+core = 7.x
