@@ -145,18 +145,13 @@
 
 <!-- start main content -->
 <div class="main-container">
-
-    <div class="row">
-
-        <section<?php print $content_column_class; ?>>
-            <a id="main-content"></a>
-            <?php if (!empty($action_links)): ?>
-                <ul class="action-links"><?php print render($action_links); ?></ul>
-            <?php endif; ?>
-            <?php print render($page['content']); ?>
-        </section>
-
-    </div>
+    <section>
+        <a id="main-content"></a>
+        <?php if (!empty($action_links)): ?>
+            <ul class="action-links"><?php print render($action_links); ?></ul>
+        <?php endif; ?>
+        <?php print render($page['content']); ?>
+    </section>
 </div>
 <!-- end main content -->
 

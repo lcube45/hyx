@@ -37,11 +37,17 @@ a {
 
 .nav-tabs {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .banner h1 {
     color: #fff;
     border: 0;
+}
+
+.hyx-onecol-banner .center.banner {
+    margin-top: 20px;
+    padding: 10px 0 10px 0;
 }
 
 .wrapper-footer {
