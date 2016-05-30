@@ -74,36 +74,44 @@
  */
 ?>
 <!-- start top bar -->
-<div class="<?php print $container_class; ?> hyx-header">
-    <div class="row">
-        <div class="col-md-6 col-xs-12">
-
-          <?php if ($logo): ?>
-            <a class="logo navbar-btn" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-              <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" height="70px" />
-            </a>
-          <?php endif; ?>
-        </div>
-
-        <div class="col-md-6 col-xs-12">
-            <div class="row">
-              <div class="col-xs-2">
-                <?php print $locale['content']; ?>
-              </div>
-              <div class="col-xs-4">
-                <ul class="list-inline">
-                  <li>
-                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                    <?php print t('Shopping cart'); ?> (<?php print $cart['content']; ?>)
-                  </li>
-                </ul>
-              </div>
-              <div class="col-xs-6">
-                <?php print render($menu_user); ?>
-              </div>
-            </div>
-        </div>
+<div class="hyx-header">
+  <a href="<?php print $front_page; ?>">
+    <div class="hyx-logo-container">
+      <img class="hyx-logo" src="<?php print $logo; ?>">
+      <div class="color-slider">
+        <div class="hyx-logo-fill bg-primary"></div>
+        <div class="hyx-logo-fill bg-gray"></div>
+        <div class="hyx-logo-fill bg-primary"></div>
+      </div>
     </div>
+  </a>
+
+
+  <ul class="hyx-header-toolbox">
+
+    <!-- TRADUCTION -->
+    <li class="hyx-toolbox-item">
+      <div class="hyx-radio-list" data-toggle="buttons" role="traduction">
+        <?php print render($locale); ?>
+      </div>
+    </li>
+
+    <!-- PANIER -->
+    <li class="hyx-toolbox-item">
+      <button type="button" class="btn hyx-button" data-title="<?php print t('Shopping cart'); ?> (<?php print render($cart['content']); ?>)" data-title-xs="" disabled="">
+        <span class="hyx-icon-basket"></span>
+      </button>
+    </li>
+
+    <!-- LOGIN -->
+    <li class="hyx-toolbox-item">
+      <button type="button" class="btn hyx-button" data-title="connection" data-title-xs="">
+        <span class="hyx-icon-user"></span>
+      </button>
+    </li>
+
+  </ul>
+
 </div>
 <!-- end top bar -->
 
@@ -150,6 +158,7 @@
         <?php if (!empty($action_links)): ?>
             <ul class="action-links"><?php print render($action_links); ?></ul>
         <?php endif; ?>
+        <div><?php print $messages; ?></div>
         <?php print render($page['content']); ?>
     </section>
 </div>
