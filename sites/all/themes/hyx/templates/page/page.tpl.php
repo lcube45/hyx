@@ -92,22 +92,28 @@
     <!-- TRADUCTION -->
     <li class="hyx-toolbox-item">
       <div class="hyx-radio-list" data-toggle="buttons" role="traduction">
-        <?php print render($locale); ?>
+        <?php print $locale['content']; ?>
       </div>
     </li>
 
     <!-- PANIER -->
     <li class="hyx-toolbox-item">
-      <button type="button" class="btn hyx-button" data-title="<?php print t('Shopping cart'); ?> (<?php print render($cart['content']); ?>)" data-title-xs="" disabled="">
+      <a href="/cart" class="btn hyx-button" data-title="<?php print t('Shopping cart'); ?> (<?php print render($cart['content']); ?>)" data-title-xs="">
         <span class="hyx-icon-basket"></span>
-      </button>
+      </a>
     </li>
 
     <!-- LOGIN -->
     <li class="hyx-toolbox-item">
-      <button type="button" class="btn hyx-button" data-title="connection" data-title-xs="">
+      <?php if(!$logged_in): ?>
+      <a href="/user/login" class="btn hyx-button" data-title="<?php print t('Login'); ?>" data-title-xs="">
         <span class="hyx-icon-user"></span>
-      </button>
+      </a>
+      <?php else: ?>
+      <a href="/user" class="btn hyx-button" data-title="<?php print t('My Account'); ?>" data-title-xs="">
+        <span class="hyx-icon-user"></span>
+      </a>
+      <?php endif; ?>
     </li>
 
   </ul>
@@ -116,39 +122,29 @@
 <!-- end top bar -->
 
 <!-- start navigation -->
-<header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
-    <div class="<?php print $container_class; ?>">
-        <div class="navbar-header">
-            <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only"><?php print t('Toggle navigation'); ?></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            <?php endif; ?>
-        </div>
-
-        <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
-            <div class="navbar-collapse collapse">
-                <nav role="navigation">
-                    <?php if (!empty($primary_nav)): ?>
-                        <?php print render($primary_nav); ?>
-                    <?php endif; ?>
-
-                    <?php print render($search_block_form['content']); ?>
-
-                    <?php if (!empty($secondary_nav)): ?>
-                        <?php print render($secondary_nav); ?>
-                    <?php endif; ?>
-                    <?php if (!empty($page['navigation'])): ?>
-                        <?php print render($page['navigation']); ?>
-                    <?php endif; ?>
-                </nav>
-            </div>
-        <?php endif; ?>
+<nav class="hyx-navbar">
+  <div class="hyx-navbar-container">
+    <div class="navbar-header">
+      <?php if (!empty($primary_nav)): ?>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only"><?php print t('Toggle navigation'); ?></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      <?php endif; ?>
     </div>
-</header>
+
+    <div class="navbar-collapse collapse">
+      <?php if (!empty($primary_nav)): ?>
+        <?php print render($primary_nav); ?>
+      <?php endif; ?>
+      <?php print render($search_block_form['content']); ?>
+    </div>
+
+  </div>
+
+</nav>
 <!-- end navigation -->
 
 <!-- start main content -->
@@ -164,38 +160,31 @@
 </div>
 <!-- end main content -->
 
-<!-- start 3 blocks footer -->
-<div class="wrapper-footer">
-    <div class="<?php print $container_class; ?>">
-        <div class="row">
-            <?php if(!empty($page['footer_first'])): ?>
-            <div id="footer-first" class="col-sm-4">
-                <?php print render($page['footer_first']); ?>
-            </div>
-            <?php endif; ?>
+<!-- start footer -->
+<footer>
+  <div class="bg-gray hyx-footer">
+    <div class="hyx-wrapper">
+      <div class="row">
+        <?php if(!empty($page['footer_first'])): ?>
+          <div id="footer-first" class="col-sm-4">
+            <?php print render($page['footer_first']); ?>
+          </div>
+        <?php endif; ?>
 
-            <?php if(!empty($page['footer_second'])): ?>
-            <div id="footer-second" class="col-sm-4">
-                <?php print render($page['footer_second']); ?>
-            </div>
-            <?php endif; ?>
+        <?php if(!empty($page['footer_second'])): ?>
+          <div id="footer-second" class="col-sm-4">
+            <?php print render($page['footer_second']); ?>
+          </div>
+        <?php endif; ?>
 
-            <?php if(!empty($page['footer_third'])): ?>
-            <div id="footer-third" class="col-sm-4">
-                <?php print render($page['footer_third']); ?>
-            </div>
-            <?php endif; ?>
-        </div>
+        <?php if(!empty($page['footer_third'])): ?>
+          <div id="footer-third" class="col-sm-4">
+            <?php print render($page['footer_third']); ?>
+          </div>
+        <?php endif; ?>
+      </div>
+      <?php print render($page['footer']); ?>
     </div>
-</div>
-<!-- end 3 blocks footer -->
-
-<!-- start menu footer -->
-<?php if (!empty($page['footer'])): ?>
-<footer class="footer">
-    <div class="<?php print $container_class; ?>">
-        <?php print render($page['footer']); ?>
-    </div>
+  </div>
 </footer>
-<?php endif; ?>
-<!--end menu footer -->
+<!--end footer -->

@@ -6,16 +6,16 @@ a {
     color: #53caff;
 }
 
+img {
+    margin: 0;
+}
+
 .field-name-field-image img {
     /*border: 1px solid #000000;*/
 }
 .navbar{
     margin-bottom: 0;
     border-bottom: 0;
-}
-
-.hyx-header ul {
-    margin-top: 30px;
 }
 
 .breadcrumb {
@@ -48,22 +48,4 @@ a {
 .hyx-onecol-banner .center.banner {
     margin-top: 20px;
     padding: 10px 0 10px 0;
-}
-
-.wrapper-footer {
-    background-color: #3D3D3C;
-    padding: 20px 0;
-    color: #d6d6d5;
-    margin-top: 40px;
-}
-
-.wrapper-footer h2 {
-    font-size: 1.4em;
-    color: #FFFFFF;
-}
-.footer {
-    background-color: #333332;
-    margin-top: 0;
-    border-top: 0;
-    padding-top: 10px;
 }

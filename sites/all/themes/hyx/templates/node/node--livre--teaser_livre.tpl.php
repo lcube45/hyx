@@ -7,8 +7,7 @@
     <a href="<?php print $node_url; ?>">
       <h3><?php print $title; ?></h3>
     </a>
-    <p>Edition :</p>
-    <?php print render($content['field_langue']); ?>
+    <p>Edition : <?php print render($content['field_langue']); ?></p>
     <h5><?php print render($content['product:commerce_price']); ?></h5>
     <ul class="hyx-cover-over-ui">
       <li>
