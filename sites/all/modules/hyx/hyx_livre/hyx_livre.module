@@ -7,6 +7,15 @@
 include_once 'hyx_livre.features.inc';
 
 /**
+ * Implements hook_ctools_plugin_directory
+ */
+function hyx_livre_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools' && $plugin_type == 'content_types') {
+    return 'plugins/' . $plugin_type;
+  }
+}
+
+/**
  * Implement hook_preprocess_node
  */
 function hyx_livre_preprocess_node(&$variables) {

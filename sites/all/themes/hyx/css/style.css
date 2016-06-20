@@ -20,13 +20,8 @@ img {
 
 .breadcrumb {
     background-color: transparent;
-    color: #fff;
     margin-bottom: 10px;
     padding-left: 0;
-}
-
-.breadcrumb a, .breadcrumb .active {
-    color: #fff;
 }
 
 .banner {
@@ -37,7 +32,7 @@ img {
 
 .nav-tabs {
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .banner h1 {

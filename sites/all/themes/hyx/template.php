@@ -101,6 +101,7 @@ function hyx_form_search_api_page_search_form_hyxsearchpage_alter(&$form, &$form
   $form['keys_1']['#title'] = '';
   $form['keys_1']['#size'] = 20;
   $form['keys_1']['#attributes'] = array('class' => array('hyx-form'));
+  $form['keys_1']['#attributes']['placeholder'] = t('Recherche');
 }
 
 function hyx_bootstrap_search_form_wrapper($variables) {
@@ -132,8 +133,19 @@ function hyx_preprocess_field(&$variables) {
 }
 
 function hyx_form_alter(&$form, $form_state, $form_id) {
-  if ((strpos($form_id, 'commerce_cart_add_to_cart_form_') === 0)) {
-    $form['submit']['#hide_text'] = true;
+
+  if($form_id == 'sendinblue_signup_subscribe_block_newsletter_optin_fr_form') {
+    $form['#attributes']['class'][] = 'hyx-newsletter';
+    $form['fields']['EMAIL']['#attributes']['class'][] = 'hyx-form';
+    $form['fields']['EMAIL']['#attributes']['placeholder'] = t('Votre email');
+    $form['submit']['#icon'] = '<span class="hyx-icon-envelope"></span>';
+    $form['submit']['#icon_position'] = 'after';
+    $form['submit']['#newsletter'] = true;
+    $form['submit']['#value'] = t('S\'inscrire');
+  }
+
+  if((strpos($form_id, 'commerce_cart_add_to_cart_form_') === 0)) {
+    $form['submit']['#hide_text'] = false;
     $form['submit']['#icon'] = '<span class="hyx-icon-basket"></span>';
     $form['submit']['#cart'] = true;
   }
@@ -160,8 +172,359 @@ function hyx_button($variables) {
   if(isset($element['#cart'])) {
     unset($element['#attributes']['class']);
     $element['#attributes']['class'] = array('btn', 'hyx-button', 'cover-bt-add', 'form-submit');
+    $element['#attributes']['data-type'] = t('Add to cart');
+  }
+
+  if(isset($element['#newsletter'])) {
+    unset($element['#attributes']['class']);
+    $element['#attributes']['class'] = array('btn', 'hyx-newsletter-submit', 'form-submit');
   }
 
   // This line break adds inherent margin between multiple buttons.
   return '<button' . drupal_attributes($element['#attributes']) . '>' . $text . "</button>\n";
+}
+
+function hyx_preprocess_panels_pane(&$variables) {
+  $variables['title_attributes_array']['class'][] = 'hyx-cap';
+}
+
+function hyx_block_view_alter(&$data, $block) {
+  if($block->module == 'facetapi') {
+    unset($data['content']['field_thematique']['#attributes']['class']);
+    $data['content']['field_thematique']['#attributes']['class'][] = 'hyx-bold hyx-cap list-unstyled';
+
+    unset($data['content']['field_collection']['#attributes']['class']);
+    $data['content']['field_collection']['#attributes']['class'][] = 'hyx-bold hyx-cap list-unstyled';
+
+    unset($data['content']['field_langue']['#attributes']['class']);
+    $data['content']['field_langue']['#attributes']['class'][] = 'hyx-bold hyx-cap list-unstyled';
+  }
+}
+
+function hyx_pager($variables) {
+  $output = "";
+  $items = array();
+  $tags = $variables['tags'];
+  $element = $variables['element'];
+  $parameters = $variables['parameters'];
+  $quantity = $variables['quantity'];
+
+  global $pager_page_array, $pager_total;
+
+  // Calculate various markers within this pager piece:
+  // Middle is used to "center" pages around the current page.
+  $pager_middle = ceil($quantity / 2);
+  // Current is the page we are currently paged to.
+  $pager_current = $pager_page_array[$element] + 1;
+  // First is the first page listed by this pager piece (re quantity).
+  $pager_first = $pager_current - $pager_middle + 1;
+  // Last is the last page listed by this pager piece (re quantity).
+  $pager_last = $pager_current + $quantity - $pager_middle;
+  // Max is the maximum page number.
+  $pager_max = $pager_total[$element];
+
+  // Prepare for generation loop.
+  $i = $pager_first;
+  if ($pager_last > $pager_max) {
+    // Adjust "center" if at end of query.
+    $i = $i + ($pager_max - $pager_last);
+    $pager_last = $pager_max;
+  }
+  if ($i <= 0) {
+    // Adjust "center" if at start of query.
+    $pager_last = $pager_last + (1 - $i);
+    $i = 1;
+  }
+
+  // End of generation loop preparation.
+  $li_first = theme('pager_first', array(
+    'text' => (isset($tags[0]) ? $tags[0] : t('first')),
+    'element' => $element,
+    'parameters' => $parameters,
+  ));
+  $li_previous = theme('pager_previous', array(
+    'text' => (isset($tags[1]) ? $tags[1] : t('previous')),
+    'element' => $element,
+    'interval' => 1,
+    'parameters' => $parameters,
+    'attributes' => array('class' => array('btn', 'hyx-button')),
+    'type' => 'previous'
+  ));
+  $li_next = theme('pager_next', array(
+    'text' => (isset($tags[3]) ? $tags[3] : t('next')),
+    'element' => $element,
+    'interval' => 1,
+    'parameters' => $parameters,
+    'attributes' => array('class' => array('btn', 'hyx-button')),
+    'type' => 'next'
+  ));
+  $li_last = theme('pager_last', array(
+    'text' => (isset($tags[4]) ? $tags[4] : t('last')),
+    'element' => $element,
+    'parameters' => $parameters,
+  ));
+  if ($pager_total[$element] > 1) {
+
+    // Only show "first" link if set on components' theme setting
+    if ($li_first && bootstrap_setting('pager_first_and_last')) {
+      $items[] = array(
+        'class' => array('pager-first'),
+        'data' => $li_first,
+      );
+    }
+    if ($li_previous) {
+      $items[] = array(
+        'class' => array('prev'),
+        'data' => $li_previous,
+      );
+    }
+    // When there is more than one page, create the pager list.
+    if ($i != $pager_max) {
+      if ($i > 1) {
+        $items[] = array(
+          'class' => array('pager-ellipsis', 'disabled'),
+          'data' => '<span>…</span>',
+        );
+      }
+      // Now generate the actual pager piece.
+      for (; $i <= $pager_last && $i <= $pager_max; $i++) {
+        if ($i < $pager_current) {
+          $items[] = array(
+            // 'class' => array('pager-item'),
+            'data' => theme('pager_previous', array(
+              'text' => $i,
+              'element' => $element,
+              'interval' => ($pager_current - $i),
+              'parameters' => $parameters,
+            )),
+          );
+        }
+        if ($i == $pager_current) {
+          $items[] = array(
+            // Add the active class.
+            'class' => array('active'),
+            'data' => '<a href="#">'.$i.'</a>',
+          );
+        }
+        if ($i > $pager_current) {
+          $items[] = array(
+            'data' => theme('pager_next', array(
+              'text' => $i,
+              'element' => $element,
+              'interval' => ($i - $pager_current),
+              'parameters' => $parameters,
+            )),
+          );
+        }
+      }
+      if ($i < $pager_max) {
+        $items[] = array(
+          'class' => array('pager-ellipsis', 'disabled'),
+          'data' => '<span>…</span>',
+        );
+      }
+    }
+    // End generation.
+    if ($li_next) {
+      $items[] = array(
+        'class' => array('next'),
+        'data' => $li_next,
+      );
+    }
+    // // Only show "last" link if set on components' theme setting
+    if ($li_last && bootstrap_setting('pager_first_and_last')) {
+      $items[] = array(
+        'class' => array('pager-last'),
+        'data' => $li_last,
+      );
+    }
+
+    $build = array(
+      '#theme_wrappers' => array('container__pager'),
+      '#attributes' => array(
+        'class' => array(
+          'text-center',
+        ),
+      ),
+      'pager' => array(
+        '#theme' => 'item_list',
+        '#items' => $items,
+        '#attributes' => array(
+          'class' => array('hyx-pagination'),
+        ),
+      ),
+    );
+    return drupal_render($build);
+  }
+  return $output;
+}
+
+function hyx_pager_last($variables) {
+  $text = $variables['text'];
+  $element = $variables['element'];
+  $parameters = $variables['parameters'];
+  global $pager_page_array, $pager_total;
+  $output = '';
+  $attributes = array();
+  if(isset($variables['attributes'])){
+    $attributes = $variables['attributes'];
+  }
+  $type = '';
+  if(isset($variables['type'])) {
+    $type = $variables['type'];
+  }
+
+  // If we are anywhere but the last page
+  if ($pager_page_array[$element] < ($pager_total[$element] - 1)) {
+    $output = theme('pager_link', array('text' => $text, 'page_new' => pager_load_array($pager_total[$element] - 1, $element, $pager_page_array), 'element' => $element, 'parameters' => $parameters, 'attributes' => $attributes, 'type' => $type));
+  }
+
+  return $output;
+}
+
+function hyx_pager_next($variables) {
+  $text = $variables['text'];
+  $element = $variables['element'];
+  $interval = $variables['interval'];
+  $parameters = $variables['parameters'];
+  global $pager_page_array, $pager_total;
+  $output = '';
+  $attributes = array();
+  if(isset($variables['attributes'])){
+    $attributes = $variables['attributes'];
+  }
+  $type = '';
+  if(isset($variables['type'])) {
+    $type = $variables['type'];
+  }
+
+  // If we are anywhere but the last page
+  if ($pager_page_array[$element] < ($pager_total[$element] - 1)) {
+    $page_new = pager_load_array($pager_page_array[$element] + $interval, $element, $pager_page_array);
+    // If the next page is the last page, mark the link as such.
+    if ($page_new[$element] == ($pager_total[$element] - 1)) {
+      $output = theme('pager_last', array('text' => $text, 'element' => $element, 'parameters' => $parameters, 'attributes' => $attributes, 'type' => $type));
+    }
+    // The next page is not the last page.
+    else {
+      $output = theme('pager_link', array('text' => $text, 'page_new' => $page_new, 'element' => $element, 'parameters' => $parameters, 'attributes' => $attributes, 'type' => $type));
+    }
+  }
+
+  return $output;
+}
+
+function hyx_pager_first($variables) {
+  $text = $variables['text'];
+  $element = $variables['element'];
+  $parameters = $variables['parameters'];
+  global $pager_page_array;
+  $output = '';
+  $attributes = array();
+  if(isset($variables['attributes'])){
+    $attributes = $variables['attributes'];
+  }
+  $type = '';
+  if(isset($variables['type'])) {
+    $type = $variables['type'];
+  }
+
+  // If we are anywhere but the first page
+  if ($pager_page_array[$element] > 0) {
+    $output = theme('pager_link', array('text' => $text, 'page_new' => pager_load_array(0, $element, $pager_page_array), 'element' => $element, 'parameters' => $parameters, 'attributes' => $attributes, 'type' => $type));
+  }
+
+  return $output;
+}
+
+function hyx_pager_previous($variables) {
+  $text = $variables['text'];
+  $element = $variables['element'];
+  $interval = $variables['interval'];
+  $parameters = $variables['parameters'];
+  global $pager_page_array;
+  $output = '';
+  $attributes = array();
+  if(isset($variables['attributes'])){
+    $attributes = $variables['attributes'];
+  }
+  $type = '';
+  if(isset($variables['type'])) {
+    $type = $variables['type'];
+  }
+
+  // If we are anywhere but the first page
+  if ($pager_page_array[$element] > 0) {
+    $page_new = pager_load_array($pager_page_array[$element] - $interval, $element, $pager_page_array);
+
+    // If the previous page is the first page, mark the link as such.
+    if ($page_new[$element] == 0) {
+      $output = theme('pager_first', array('text' => $text, 'element' => $element, 'parameters' => $parameters, 'attributes' => $attributes, 'type' => $type));
+    }
+    // The previous page is not the first page.
+    else {
+      $output = theme('pager_link', array('text' => $text, 'page_new' => $page_new, 'element' => $element, 'parameters' => $parameters, 'attributes' => $attributes, 'type' => $type));
+    }
+  }
+
+  return $output;
+}
+
+function hyx_pager_link($variables) {
+  $text = $variables['text'];
+  $page_new = $variables['page_new'];
+  $element = $variables['element'];
+  $parameters = $variables['parameters'];
+  $attributes = $variables['attributes'];
+  $type = '';
+  if(isset($variables['type'])) {
+    $type = $variables['type'];
+  }
+
+  $page = isset($_GET['page']) ? $_GET['page'] : '';
+  if ($new_page = implode(',', pager_load_array($page_new[$element], $element, explode(',', $page)))) {
+    $parameters['page'] = $new_page;
+  }
+
+  $query = array();
+  if (count($parameters)) {
+    $query = drupal_get_query_parameters($parameters, array());
+  }
+  if ($query_pager = pager_get_query_parameters()) {
+    $query = array_merge($query, $query_pager);
+  }
+
+  // Set each pager link title
+  if (!isset($attributes['title'])) {
+    static $titles = NULL;
+    if (!isset($titles)) {
+      $titles = array(
+        t('« first') => t('Go to first page'),
+        t('‹ previous') => t('Go to previous page'),
+        t('next ›') => t('Go to next page'),
+        t('last »') => t('Go to last page'),
+      );
+    }
+    if (isset($titles[$text])) {
+      $attributes['title'] = $titles[$text];
+    }
+    elseif (is_numeric($text)) {
+      $attributes['title'] = t('Go to page @number', array('@number' => $text));
+    }
+  }
+
+  // @todo l() cannot be used here, since it adds an 'active' class based on the
+  //   path only (which is always the current path for pager links). Apparently,
+  //   none of the pager links is active at any time - but it should still be
+  //   possible to use l() here.
+  // @see http://drupal.org/node/1410574
+  $attributes['href'] = url($_GET['q'], array('query' => $query));
+  if($type == 'next') {
+    return '<a' . drupal_attributes($attributes) . '><span class="hyx-icon-forward"></a>';
+  } elseif($type == 'previous') {
+    return '<a' . drupal_attributes($attributes) . '><span class="hyx-icon-backward"></span></a>';
+  } else {
+    return '<a' . drupal_attributes($attributes) . '>' . check_plain($text) . '</a>';
+  }
+
 }
