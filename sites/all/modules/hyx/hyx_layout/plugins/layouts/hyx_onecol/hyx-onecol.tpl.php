@@ -1,4 +1,4 @@
-<div class="hyx-wrapper <?php print $classes ?>" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
+<div class="<?php print $classes ?>" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
 
   <?php if ($content['top']): ?>
       <div class="row">

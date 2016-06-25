@@ -110,11 +110,7 @@ function hyx_bootstrap_search_form_wrapper($variables) {
   return $output;
 }
 
-function hyx_form_element_label($vars) {
-  if(isset($vars['element']['#id']) &&  $vars['element']['#id'] == 'edit-keys-1') {
-    return null;
-  }
-}
+
 
 function hyx_preprocess_field(&$variables) {
 
@@ -198,6 +194,12 @@ function hyx_block_view_alter(&$data, $block) {
 
     unset($data['content']['field_langue']['#attributes']['class']);
     $data['content']['field_langue']['#attributes']['class'][] = 'hyx-bold hyx-cap list-unstyled';
+
+    unset($data['content']['field_tags']['#attributes']['class']);
+    $data['content']['field_tags']['#attributes']['class'][] = 'hyx-bold hyx-cap list-unstyled';
+
+    unset($data['content']['type']['#attributes']['class']);
+    $data['content']['type']['#attributes']['class'][] = 'hyx-bold hyx-cap list-unstyled';
   }
 }
 
