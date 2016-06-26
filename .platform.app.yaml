@@ -5,6 +5,10 @@ type: php:5.5
 # The way to build your application.
 build:
     flavor: drupal
+
+preflight:
+    enabled: false
+
 # The way services are mapped within your application.
 relationships:
     database: "mysql:mysql"
