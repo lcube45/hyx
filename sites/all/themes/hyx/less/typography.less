@@ -1,0 +1,98 @@
+.custom-font(@family: inherit, @weight: inherit, @size: inherit) {
+	font-family: @family;
+	font-weight: @weight;
+	font-size: @size;
+}
+
+.h1, .h2, .h3, .h4,  h1, h2, h3, h4 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+		line-height: 1.3em;
+}
+
+h2.single-title {
+	margin:0;
+
+	@media @small-devices {
+		margin-top: 20px;
+	}
+}
+
+h6.note {
+	.hyx-regular;
+	line-height: inherit;
+}
+
+/* ---------------------- TYPOGRAPHY UTILITY ---------------------- */
+
+p, .p {
+	margin: 8px 0px 8px;
+}
+
+.hyx-regular {
+	font-weight:400;
+	*:not(b) {
+		font-weight:400;
+	}
+}
+
+.hyx-semibold {
+	font-weight:500;
+	*:not(b) {
+		font-weight:500;
+	}
+}
+
+.hyx-bold {
+	font-weight:700;
+	* {
+		font-weight:700;
+	}
+}
+
+.hyx-italic {
+	font-style: italic;
+	* {
+		font-style: italic;
+	}
+}
+
+.hyx-cap {
+	text-transform: uppercase;
+	* {
+		text-transform: uppercase;
+	}
+}
+
+.hyx-regular-italic {
+	.hyx-regular;
+	.hyx-italic;
+	* {
+		.hyx-regular;
+		.hyx-italic;
+	}
+}
+
+.hyx-semibold-italic {
+	.hyx-semibold;
+	.hyx-italic;
+	* {
+		.hyx-semibold;
+		.hyx-italic;
+	}
+}
+
+.hyx-bold-italic {
+	.hyx-bold;
+	.hyx-italic;
+	* {
+		.hyx-bold;
+		.hyx-italic;
+	}
+}
+
+input, textarea {
+	&:placeholder-shown {
+		.hyx-regular-italic;
+	}
+}

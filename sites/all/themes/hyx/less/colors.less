@@ -1,0 +1,262 @@
+
+/* ---------------- COLORS CONTEXT CLASSES ---------------- */
+
+.colors(@bg, @text, @links) {
+
+	background : @bg;
+
+	*:not(dev) { 	// Exclude protected <dev>
+
+		color : @text;
+	}
+
+	p, .p, .note{
+		a { color : @links; }
+	}
+}
+
+.bg-gray-dark {
+	.colors(@gray-dark, @gray-lighter, @brand-primary-light);
+}
+
+.bg-gray {
+	.colors(@gray, @gray-lighter, @brand-primary-light); // Default dark bg
+}
+
+.bg-gray-light {
+	.colors(@gray-light, @gray-lighter, @brand-primary);
+}
+
+.bg-gray-lighter {
+	.colors(@gray-lighter, @gray, @brand-primary-light);
+}
+
+.bg-primary {
+	.colors(@brand-primary, @body-bg, @gray-light);
+}
+
+.bg-primary-light {
+	.colors(@brand-primary-light, @body-bg, @gray-light);
+}
+
+
+/* ----------------- PLACEHOLDER TEXT COLOR ----------------- */
+
+.placeholder-color(@color, @alpha : 1) {
+	&::-webkit-input-placeholder 	{ color: @color !important; .opacity(@alpha);}
+	&:-moz-placeholder 				{ color: @color !important; .opacity(@alpha);}
+	&::-moz-placeholder 			{ color: @color !important; .opacity(@alpha);}
+	&:-ms-input-placeholder 		{ color: @color !important; .opacity(@alpha);}
+}
+
+
+/* ----------------- ELEMENTS SELECTION COLOR ---------------- */
+
+.selection-color(@bg-color, @text-color) {
+	&::selection 		{ background: @bg-color; color: @text-color }
+	&::-moz-selection 	{ background: @bg-color; color: @text-color }
+}
+
+* {
+	.selection-color(@brand-primary, @body-bg);
+}
+
+
+/* ----------------------- FORM COLORS ----------------------- */
+
+.hyx-form-display(@baseCol, @overCol) {
+
+	color : @baseCol;
+	background: transparent;
+
+		&:not([disabled]) {
+
+			&:placeholder-shown {
+				&:focus {
+					.placeholder-color(transparent, 0);
+				}
+			}
+
+			&:hover, &:focus {
+				.no-box-shadow;
+				color	: @overCol;
+			}
+
+		}
+
+	&[disabled] {
+		color : @baseCol;
+		background: transparent;
+	}
+
+}
+
+
+/* ---------------------- BUTTONS COLORS ---------------------- */
+
+.hyx-button-display(@baseCol, @overCol, @typeOverCol) {
+
+	&:not([disabled]) {
+
+		span {
+			color: @baseCol;
+		}
+
+		&:hover {
+			span {
+				background-color: @overCol;
+				color: @typeOverCol;
+			}
+
+			&:after {
+				color: @overCol;
+			}
+		}
+
+		&:after {
+			color: @baseCol;
+		}
+
+		&.active, &:active {
+			&:after {
+				color: @overCol;
+			}
+		}
+	}
+
+	&[disabled] {
+		span { color: @baseCol; }
+		&:after { color: @baseCol; }
+	}
+}
+
+
+/* -------------------- PAGER LINKS COLORS -------------------- */
+
+.hyx-pager-link-display(@baseCol, @hoverCol) {
+
+	a {
+		color : @baseCol;
+		background : transparent;
+
+		&:hover {
+			color : @hoverCol;
+		}
+
+		&:active {
+			color : @hoverCol;
+		}
+	}
+
+	&.active {
+		a {
+			color : @hoverCol;
+
+			&:hover {
+				color : @baseCol;
+			}
+		}
+	}
+}
+
+
+/* ---------------------- ALERTS COLORS ---------------------- */
+
+.alert-colors(@bg, @text) {
+
+	background : @bg;
+	color : @text;
+
+		* {
+			color : @text;
+		}
+}
+
+.hyx-alert-display(@type, @context) {
+
+	@light : @gray;
+	@dark  : @gray-lighter;
+
+	& when (@type = success) {
+		& when (@context = light) 	{.alert-colors(@state-success-bg, @light); } 	// Hardcoded transparency 80% over @body-bg (Bootstrap default)
+		& when (@context = dark) 	{.alert-colors(#5fa194, @dark); } 				// Hardcoded transparency 80% over @gray
+	}
+
+	& when (@type = info) {
+		& when (@context = light) 	{.alert-colors(@state-info-bg, @light); }		// Hardcoded transparency 80% over @body-bg (Bootstrap default)
+		& when (@context = dark) 	{.alert-colors(#438ab3, @dark); } 				// Hardcoded transparency 80% over @gray
+	}
+
+	& when (@type = warning) {
+		& when (@context = light) 	{.alert-colors(@state-warning-bg, @light); }	// Hardcoded transparency 80% over @body-bg (Bootstrap default)
+		& when (@context = dark) 	{.alert-colors(#b6763b, @dark); } 				// Hardcoded transparency 80% over @gray
+	}
+
+	& when (@type = danger) {
+		& when (@context = light) 	{.alert-colors(@state-danger-bg, @light); }		// Hardcoded transparency 80% over @body-bg (Bootstrap default)
+		& when (@context = dark) 	{.alert-colors(#b74c39, @dark); } 				// Hardcoded transparency 80% over @gray
+	}
+}
+
+.alert-colors(@context) {
+
+		&.alert-success	 { .hyx-alert-display(success, 	@context) }
+		&.alert-info	 { .hyx-alert-display(info, 	@context) }
+		&.alert-warning	 { .hyx-alert-display(warning,	@context) }
+		&.alert-danger	 { .hyx-alert-display(danger, 	@context) }
+}
+
+
+/* -------------------- PUSH ALL RULES UP -------------------- */
+
+.push-all-rules-up(@context) {
+
+	.hyx-form, .hyx-spam-check, .hyx-textarea {
+		& when (@context = light) {
+			.hyx-form-display(@gray, @brand-primary);
+		}
+		& when (@context = dark) {
+			.hyx-form-display(@gray-lighter, @brand-primary-light);
+		}
+	}
+
+	.btn, .hyx-button {
+		& when (@context = light) {
+			.hyx-button-display(@gray, @brand-primary, @body-bg);
+		}
+		& when (@context = dark) {
+			.hyx-button-display(@gray-lighter, @brand-primary-light, @gray);
+		}
+	}
+
+	.hyx-pagination > li {
+		& when (@context = light) {
+			.hyx-pager-link-display(@gray, @brand-primary);
+		}
+		& when (@context = dark) {
+			.hyx-pager-link-display(@gray-lighter, @brand-primary-light);
+		}
+	}
+
+	.hyx-alert {
+		.alert-colors(@context);
+	}
+
+}
+
+
+/* --------------------------- GO --------------------------- */
+
+.bg-gray-dark,
+.bg-gray,
+.bg-gray-light {
+
+	.push-all-rules-up(dark);
+}
+
+.bg-gray-lighter,
+.bg-primary,
+.bg-primary-light, * { // default
+
+	.push-all-rules-up(light);
+}

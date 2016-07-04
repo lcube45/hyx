@@ -1,0 +1,334 @@
+
+/* ------------------ CUSTOM LOGO ROLLOVER ----------------- */
+
+.hyx-logo-display(@w, @h, @cfw, @offset) {
+
+	width	: @w;
+	height	: @h;
+
+		img.hyx-logo {
+			width	: @w;
+			height	: @h;
+		}
+
+		.color-slider {
+			width		: 3 * @cfw;
+			position	: absolute;
+			top			: 0;
+			left		: -(@cfw - @offset);
+			z-index		: -1;
+
+				.transition(all 200ms ease);
+
+				.hyx-logo-fill {
+					display		: inline-block;
+					padding		: 0;
+					margin-left	: -4px; // Hack for WTF margins in display:inline-block !!
+					width		: @cfw;
+					height		: @h;
+				}
+		}
+
+		&:hover .color-slider {
+			left: @offset;
+		}
+}
+
+/* ------------------ DISPLAY THE HYX LOGO ------------------ */
+
+.hyx-logo-container {
+
+	position		: relative;
+	overflow		: hidden;
+	cursor			: pointer;
+	margin-bottom	: 10px;
+	float			: left;
+
+	color: @body-bg;
+	.inner-border(1px);
+
+	.hyx-logo-display(
+		280px, 		// Logo img width
+		91px, 		// Logo img height
+		190px, 		// Color fill bg width
+		3px				// Color fill bg offset width
+	);
+
+		@media @small-devices {
+
+			.hyx-logo-display(
+				152px, 		// Small Logo img width
+				50px, 		// Small Logo img height
+				100px, 		// Small Color fill bg width
+				4px			// Small Color fill bg offset width
+			);
+		}
+
+		// @media @smaller-devices {
+		//
+		// 	.hyx-logo-display(
+		// 		152px, 		// Small Logo img width
+		// 		50px, 		// Small Logo img height
+		// 		100px, 		// Small Color fill bg width
+		// 		-100px			// Small Color fill bg offset width
+		// 	);
+		//
+		// 	width: 52px !important;
+		//
+		// 	img.hyx-logo {
+		// 		position: absolute;
+		// 		left: -100px;
+		// 	}
+		// }
+}
+
+/* ---------------------- ICON DESIGN ---------------------- */
+
+.pixel-perfect-icon(@x, @y) {
+
+		@line-height-base : 33px;
+		@text-indent-base : 0px;
+
+		@line-height : (@line-height-base + @x);
+		@text-indent : (@text-indent-base + @y);
+
+	&:before {
+		line-height : @line-height !important;
+		text-indent : @text-indent !important;
+	}
+}
+
+[class^="hyx-icon-"] 	{ .glyphicon; }
+
+.hyx-icon-basket 			{ .glyphicon-shopping-cart; 	.pixel-perfect-icon(1 , 0)}
+.hyx-icon-user 				{ .glyphicon-user; 						.pixel-perfect-icon(0 , 0)}
+.hyx-icon-search 			{ .glyphicon-search; 					.pixel-perfect-icon(0 , 0)}
+.hyx-icon-asterisk 		{ .glyphicon-asterisk;				.pixel-perfect-icon(1 , 0)}
+.hyx-icon-plus 				{ .glyphicon-plus; 						.pixel-perfect-icon(0 , 1)}
+.hyx-icon-minus 			{ .glyphicon-minus;						.pixel-perfect-icon(0 , 0)}
+.hyx-icon-envelope 		{ .glyphicon-envelope;				.pixel-perfect-icon(1 , 0)}
+.hyx-icon-star 				{ .glyphicon-star;						.pixel-perfect-icon(1 , 1)}
+.hyx-icon-ok 					{ .glyphicon-ok;							.pixel-perfect-icon(0 , 0)}
+.hyx-icon-remove 			{ .glyphicon-remove;					.pixel-perfect-icon(1 , 0)}
+.hyx-icon-book 				{ .glyphicon-book;						.pixel-perfect-icon(0 , 0)}
+.hyx-icon-map-marker 	{ .glyphicon-map-marker;			.pixel-perfect-icon(0 ,-2)}
+.hyx-icon-download 		{ .glyphicon-arrow-down;			.pixel-perfect-icon(1 , 0)}
+.hyx-icon-print 			{ .glyphicon-print;						.pixel-perfect-icon(0 , 1)}
+.hyx-icon-arrow-right { .glyphicon-arrow-right;			.pixel-perfect-icon(0 , 2)}
+.hyx-icon-arrow-left 	{ .glyphicon-arrow-left;			.pixel-perfect-icon(0 ,-2)}
+.hyx-icon-backward		{ .glyphicon-backward;				.pixel-perfect-icon(0 ,-5)}
+.hyx-icon-forward 		{ .glyphicon-forward;					.pixel-perfect-icon(0 , 5)}
+.hyx-icon-send 				{ .glyphicon-send;						.pixel-perfect-icon(0 ,-3)}
+
+// + 2 custom symbols :
+
+.hyx-icon-help 			{
+	.pixel-perfect-icon(0 , 0);
+		&:before {
+			.custom-font(menlo, bold, 19px);
+			content:'?';
+		}
+}
+
+.hyx-icon-infos 		{
+	.pixel-perfect-icon(0 , 0);
+		&:before {
+			.custom-font(menlo, bold, 18px);
+			content:'i';
+		}
+}
+
+/* --------------------- BUTTON DESIGN --------------------- */
+
+@hyx-radius: 34px;
+@hyx-border-radius:  (@hyx-radius / 2);
+
+.hyx-button {
+
+
+	@btn-stroke-wheight: 2px;
+
+	background : transparent;
+	position:relative;
+	text-align: center;
+	padding: @btn-stroke-wheight;
+	.no-border-radius();
+
+	span {
+
+		.inner-border(@btn-stroke-wheight);
+		border:none;
+		.circle(@hyx-radius);
+
+		margin-top: -(@btn-stroke-wheight);
+
+		display: inline-block;
+		vertical-align: middle;
+
+			&:before {
+				display: inline-block;
+			}
+	}
+
+	&:not([disabled]) {
+		&:hover {
+			span { .no-box-shadow; }
+		}
+	}
+
+	&:after {
+		display: block;
+		.get-data-atributes(title);
+	}
+}
+
+.inline-name {
+	&:after {
+		display: inline;
+	}
+}
+
+.inline-name-left {
+	&:after {
+		.inline-name;
+		float: left;
+		padding: 6px;
+	}
+}
+
+
+
+/* ------------------- PAGER LINES BUILD ------------------- */
+
+.pager-separator( @pager : false ) {
+
+	border-left: 1px solid;
+	color: inherit;
+
+	& when (@pager = false) {
+		&:first-child {
+			border: none;
+		}
+	}
+
+	& when (@pager = true) {
+		&:first-child, &:nth-child(2), &:last-child {
+			border: none;
+		}
+	}
+}
+
+/* ------------------ RADIO-BUTTON DESIGN ------------------ */
+.hyx-radio-list {
+
+	.hyx-radio {
+
+		.hyx-regular;
+
+		height				: 48px;
+		padding				: 14px;
+		border-radius	: 0px;
+		margin-left 	: -4px;
+
+		.pager-separator(false);
+
+		&:after {
+			.get-data-atributes(title);
+		}
+
+		&.active, &:active {
+			.hyx-semibold;
+		}
+
+		@media @small-devices {
+			height: 38px;
+			padding: 9px;
+		}
+
+		@media @smaller-devices {
+			height: 33px;
+
+			&:first-child {
+				padding: 7px 7px 7px 1px;
+			}
+			&:not(:first-child):not(:last-child) { padding: 7px; }
+			&:last-child { padding: 7px 1px 7px 7px; }
+		}
+	}
+
+}
+
+/* -------------------- PAGINATION LINKS -------------------- */
+
+.hyx-pagination {
+
+	li {
+
+		display: inline;
+		float: left;
+		.pager-separator(true);
+
+		&.active {
+			.hyx-bold;
+		}
+
+		a {
+			.hyx-regular;
+			position	: relative;
+			float		: left;
+			padding		: 8px 12px;
+
+			@media @smaller-devices {
+				padding	: 8px 8px;
+			}
+		}
+	}
+}
+
+
+/* -------------------- TEXT-FORM DESIGN -------------------- */
+
+.hyx-form-base(@textAlign : center) {
+
+	.form-control;
+	text-align: @textAlign;
+
+	.border-radius(@hyx-border-radius);
+	.no-transition;
+
+	border : 1px solid;
+
+	&:focus {
+		border : 2px solid;
+	}
+
+
+
+	span {
+		width			: 11px;
+		margin-left		: -3px;
+		vertical-align	: text-top;
+	}
+
+	@media @small-devices {
+		margin : 0;
+	}
+
+}
+
+.hyx-form {
+	.hyx-form-base(center);
+}
+
+.hyx-textarea {
+	.hyx-form-base(left);
+}
+
+.hyx-alert {
+
+	.alert;
+	.text-center;
+	.border-radius(@hyx-border-radius);
+	border: none;
+
+}

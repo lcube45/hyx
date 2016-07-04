@@ -1,0 +1,163 @@
+/* ------------------------- COLUMNS UTILS ------------------------ */
+.hyx-books-v-align {
+
+	display: inline-block;
+	vertical-align: middle;
+	float: none !important;
+	    margin: 0px -3px @grid-gutter-width 0px;
+
+	@media @smaller-devices {
+		display: block;
+		width: 100%;
+	}
+}
+
+.row {
+	margin-bottom: 20px;
+}
+
+/* ----------------- BOOK'S COVER IMAGE CONTAINER ----------------- */
+.hyx-cover-img {
+	border:1px solid @gray-lighter;
+	.border-radius(6px 0 0 6px);
+	.box-shadow(5px 5px 5px 0px @gray-lighter);
+}
+
+.hyx-cover-container {
+
+	position: relative;
+	.transition(all 200ms ease);
+	.hyx-cover-img;
+	color: @brand-primary;
+
+	background: lighten(@brand-primary-light, 30%);
+	overflow: hidden;
+
+	img {
+		.transition(all 200ms ease);
+		.opacity(1);
+		width:100%;
+	}
+
+	.hyx-cover-over {
+		.text-overflow(ellipsis);
+	}
+
+	&:hover, &:focus {
+
+		.inner-border(3px);
+		border-color : @brand-primary;
+
+		.hyx-cover-over {
+			display:block;
+			.opacity(1);
+
+		}
+
+		img {
+			.no-box-shadow;
+			.opacity(0.2);
+			.blur(2px);
+		}
+	}
+
+	.hyx-cover-over {
+
+		display:none;
+		overflow: hidden;
+
+
+		button {
+			position: absolute;
+			bottom: 20px;
+
+			&.cover-bt-add {
+				left: 20px;
+			}
+
+			&.cover-bt-view {
+				right: 20px;
+			}
+		}
+
+		.opacity(0);
+
+		color: @gray;
+		z-index : 1;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+
+		padding: 20px;
+
+
+	}
+}
+
+.hyx-cover-single {
+	display: block;
+
+	img {
+		.hyx-cover-img;
+		width: 100%
+	}
+}
+
+.hyx-cover-over-ui {
+	.list-unstyled;
+	.list-inline;
+}
+
+.hyx-book-cover-row {
+	.make-row();
+}
+
+.hyx-book-cover-col {
+	.hyx-books-v-align;
+	.hyx-grid-books;
+}
+
+.hyx-book-cover-col-home {
+
+	.hyx-books-v-align;
+	.hyx-grid-full;
+
+}
+
+.hyx-book-cover-col-half {
+
+	.hyx-books-v-align;
+	.hyx-grid-half;
+
+}
+
+.hyx-column(@xs:12, @sm:6, @md:4, @lg:4) {
+	.make-xs-column(@xs);
+	.make-sm-column(@sm);
+	.make-md-column(@md);
+	.make-lg-column(@lg);
+}
+
+.hyx-grid-books, .hyx-grid-news {
+	.hyx-column(12, 6, 6, 4);
+}
+
+.hyx-grid-full {
+	.hyx-column(12, 6, 4, 3);
+}
+
+.hyx-grid-half {
+	.hyx-column(12, 12, 6, 6);
+}
+
+.row-flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+	margin-bottom: 20px;
+	margin-left: -20px;
+  margin-right: -20px;
+}

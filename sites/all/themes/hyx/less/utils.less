@@ -1,0 +1,136 @@
+/* new breakpoint: tn (tiny) */
+
+@screen-tn-min:              @screen-xs-min;
+@screen-tn-max:              (@screen-xs-min - 1);
+
+.make-grid(tn);
+@media (min-width: @screen-xs-min) {
+		.make-grid(xs);
+}
+@media (min-width: @screen-sm-min) {
+	.make-grid(sm);
+}
+@media (min-width: @screen-md-min) {
+	.make-grid(md);
+}
+@media (min-width: @screen-lg-min) {
+	.make-grid(lg);
+}
+
+
+/* ------------------- MEDIA QUERY INSIDE LESS ------------------- */
+@screen-smbh: (@screen-sm - 1);
+@med-devices: ~"screen and (max-width: @{screen-md})";
+@small-devices: ~"screen and (max-width: @{screen-smbh})"; 		// iphone 6, 6+, Galaxy, ipad Mini test OK
+@smaller-devices: ~"screen and (max-width: @{screen-xs})"; 	// iphone < 4 to 5 test OK
+
+/* ----------- COMBINE BOOTSTRAP MEDIA QUERY FOR CLARTY ----------- */
+
+.hyx-large-device-only {
+	.visible-md;
+	.visible-sm;
+	.visible-lg;
+}
+
+.hyx-small-device-only {
+	.visible-xs;
+}
+
+/* --------------- CUSTOM TRANSITION ROUTINE -------------- */
+
+.transition(@transition) {
+	-webkit-transition: @transition;
+	-moz-transition:    @transition;
+	-ms-transition:     @transition;
+	-o-transition:      @transition;
+	transition:         @transition;
+}
+
+.no-transition {
+	.transition(none);
+}
+
+/* --------------- TEXT OVERFLOW ROUTINE -------------- */
+
+.text-overflow(@arg) {
+  -o-text-overflow: @arg; /* pour Opera 9 */
+  text-overflow   : @arg; /* pour le reste du monde */
+}
+
+
+/* --------------- CUSTOM OPACITY ROUTINE -------------- */
+
+.opacity(@alpha) {
+
+	@alphaIE : (@alpha * 100);
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=@{alphaIE})"; // IE8
+	filter: alpha(opacity=@alphaIE); // IE 5-7
+	opacity: @alpha;
+}
+
+/* --------------- CUSTOM BORDER RADIUS ROUTINE -------------- */
+
+.border-radius(@radius) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	border-radius: @radius;
+}
+
+.circle(@radius) {
+	width: @radius;
+	height: @radius;
+	.border-radius(@radius / 2);
+}
+.no-border-radius() {
+	.border-radius(0);
+}
+
+.blur(@pix) {
+	-webkit-filter: blur(@pix);
+	filter: blur(@pix);
+}
+
+
+/* --------------- CUSTOM BOXSHADOW ROUTINE -------------- */
+
+.box-shadow (@string) {
+	-webkit-box-shadow: @string;
+	-moz-box-shadow:    @string;
+	box-shadow:         @string;
+}
+
+.inner-border(@stroke-weight : 1px) {
+	.box-shadow (0 0 0 @stroke-weight inset)
+}
+
+.no-box-shadow {
+	.box-shadow (none);
+}
+
+/* ------------------- GET DATA ATTRIBUTES AFTER ------------------ */
+
+.get-data-atributes(@name) {
+	content : attr(~'data-@{name}');
+
+	@media @small-devices {
+		content : attr(~'data-@{name}-xs');
+	}
+
+}
+
+
+/* ---------------- DEVELOPEMENT STYLE-GUIDE NOTES ---------------- */
+
+dev {
+	display: block;
+	font-family: consolas,menlo,'courier news';
+	font-size: 100%;
+	text-align: left !important;
+	margin: 5px 0;
+	color: @gray-light;
+	padding: 2px 10px;
+	background-color: lighten(@brand-primary, 35%);
+	text-transform: underline;
+	border-radius: 3px;
+	&:before { content: "→ "; }
+}

@@ -2,6 +2,10 @@
 
 function hyx_preprocess_page(&$variables) {
 
+    if (!empty($variables['node']) && !empty($variables['node']->type)) {
+        $variables['theme_hook_suggestions'][] = 'page__node__' . $variables['node']->type;
+    }
+
   // block de locale
   $variables['locale'] = module_invoke('locale', 'block_view', 'language');
 
@@ -61,34 +65,20 @@ function hyx_menu_tree__user_menu(&$variables){
 }
 
 function hyx_links__locale_block(&$variables) {
-  global $language;
 
-  $output = '';
-  $output.= '<div class="hyx-radio-list">';
+    global $language;
 
-  foreach($variables['links'] as $id => $link) {
-    if($language->language == $id) {
-      $attributes = array(
-        'class' => array('btn hyx-radio'),
-        'data-title-xs' => ucfirst($id),
-      );
-    } else {
-      $attributes = array(
-        'class' => array('btn hyx-radio'),
-        'data-title-xs' => ucfirst($id),
-      );
+    $variables['attributes']['class'][] = 'list-inline';
+
+    foreach($variables['links'] as $id => $link) {
+        $variables['links'][$id]['attributes']['class'][] = 'btn hyx-radio';
+        $variables['links'][$id]['attributes']['data-title-xs'] = ucfirst($id);
     }
 
-    if(isset($link['href'])) {
-      $output.= l($link['title'],$link['href'],array('attributes' => $attributes));
-    } else {
-      $output.= l($link['title'],'/'.$id,array('attributes' => $attributes));
-    }
-  }
+    $content = theme_links($variables);
 
-  $output.= '</div>';
+    return $content;
 
-  return $output;
 }
 
 function hyx_form_search_api_page_search_form_hyxsearchpage_alter(&$form, &$form_state, $form_id) {
