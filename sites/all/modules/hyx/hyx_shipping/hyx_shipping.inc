@@ -2,806 +2,70 @@
 
 /*
  * @file
- * Defines commerce_colissimo rates for "entreprise" rates table
+ * Defines rates for zone france
+ *
+ * Andorra,20 France,250 Monaco,492
  */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_nationale_access_f() {
+function hyx_tarif_zone_france() {
   $rates = array(
     array(
-      'weight' => 0.25,
-      'price' => 508,
-      ),
-    array(
-      'weight' => 0.5,
-      'price' => 571,
-      ),
-    array(
-      'weight' => 0.75,
-      'price' => 634,
-      ),
-    array(
-      'weight' => 1,
-      'price' => 680,
-      ),
-    array(
       'weight' => 2,
-      'price' => 751,
+      'price' => 345,
       ),
     array(
       'weight' => 3,
-      'price' => 823,
-      ),
-    array(
-      'weight' => 4,
-      'price' => 898,
+      'price' => 600,
       ),
     array(
       'weight' => 5,
-      'price' => 973,
-      ),
-    array(
-      'weight' => 6,
-      'price' => 1048,
+      'price' => 835,
       ),
     array(
       'weight' => 7,
-      'price' => 1123,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 1198,
-      ),
-    array(
-      'weight' => 9,
-      'price' => 1273,
-      ),
-    array(
-      'weight' => 10,
-      'price' => 1348,
-      ),
-    array(
-      'weight' => 15,
-      'price' => 1540,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 2100,
-      ),
-  );
-
-  return $rates;
-}
-
-/**
- * Build an array of rates based on Colissimo recommandé Metropole price table
- * @return array
- *  The array has the following form:
- *  [0] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- *  [1] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- * ...
- */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_nationale_expert_f() {
-  $rates = array(
-    array(
-      'weight' => 0.25,
-      'price' => 568,
-      ),
-    array(
-      'weight' => 0.5,
-      'price' => 645,
-      ),
-    array(
-      'weight' => 0.75,
-      'price' => 714,
-      ),
-    array(
-      'weight' => 1,
-      'price' => 770,
-      ),
-    array(
-      'weight' => 2,
-      'price' => 841,
-      ),
-    array(
-      'weight' => 3,
-      'price' => 913,
-      ),
-    array(
-      'weight' => 4,
-      'price' => 988,
-      ),
-    array(
-      'weight' => 5,
-      'price' => 1063,
-      ),
-    array(
-      'weight' => 6,
-      'price' => 1138,
-      ),
-    array(
-      'weight' => 7,
-      'price' => 1213,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 1288,
-      ),
-    array(
-      'weight' => 9,
-      'price' => 1363,
-      ),
-    array(
-      'weight' => 10,
-      'price' => 1438,
-      ),
-    array(
-      'weight' => 15,
-      'price' => 1630,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 2190,
-      ),
-  );
-
-  return $rates;
-}
-
-
-/**
- * Build an array of rates based on Colissimo recommandé Metropole price table
- * @return array
- *  The array has the following form:
- *  [0] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- *  [1] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- * ...
- */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_nationale_services_f() {
-  $rates = array(
-    array(
-      'weight' => 0.25,
-      'price' => 568,
-      ),
-    array(
-      'weight' => 0.5,
-      'price' => 645,
-      ),
-    array(
-      'weight' => 0.75,
-      'price' => 714,
-      ),
-    array(
-      'weight' => 1,
-      'price' => 770,
-      ),
-    array(
-      'weight' => 2,
-      'price' => 841,
-      ),
-    array(
-      'weight' => 3,
-      'price' => 913,
-      ),
-    array(
-      'weight' => 4,
-      'price' => 988,
-      ),
-    array(
-      'weight' => 5,
-      'price' => 1063,
-      ),
-    array(
-      'weight' => 6,
-      'price' => 1138,
-      ),
-    array(
-      'weight' => 7,
-      'price' => 1213,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 1288,
-      ),
-    array(
-      'weight' => 9,
-      'price' => 1363,
-      ),
-    array(
-      'weight' => 10,
-      'price' => 1438,
-      ),
-    array(
-      'weight' => 15,
-      'price' => 1630,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 2190,
-      ),
-  );
-
-  return $rates;
-}
-
-
-/**
- * Build an array of rates based on Colissimo recommandé Metropole price table
- * @return array
- *  The array has the following form:
- *  [0] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- *  [1] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- * ...
- */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_access_om1() {
-  $rates = array(
-    array(
-      'weight' => 0.5,
-      'price' => 840,
-      ),
-    array(
-      'weight' => 1,
-      'price' => 1270,
-      ),
-    array(
-      'weight' => 2,
-      'price' => 1730,
-      ),
-    array(
-      'weight' => 3,
-      'price' => 2190,
-      ),
-    array(
-      'weight' => 4,
-      'price' => 2650,
-      ),
-    array(
-      'weight' => 5,
-      'price' => 3110,
-      ),
-    array(
-      'weight' => 6,
-      'price' => 3570,
-      ),
-    array(
-      'weight' => 7,
-      'price' => 4030,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 4490,
-      ),
-    array(
-      'weight' => 9,
-      'price' => 4950,
-      ),
-    array(
-      'weight' => 10,
-      'price' => 5410,
-      ),
-    array(
-      'weight' => 15,
-      'price' => 7710,
-      ),
-    array(
-      'weight' => 20,
-      'price' => 10010,
-      ),
-    array(
-      'weight' => 25,
-      'price' => 12310,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 14610,
-      ),
-  );
-
-  return $rates;
-}
-
-/**
- * Build an array of rates based on Colissimo recommandé Metropole price table
- * @return array
- *  The array has the following form:
- *  [0] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- *  [1] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- * ...
- */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_access_om2() {
-  $rates = array(
-    array(
-      'weight' => 0.5,
-      'price' => 1000,
-      ),
-    array(
-      'weight' => 1,
       'price' => 1555,
       ),
     array(
-      'weight' => 2,
-      'price' => 2755,
-      ),
-    array(
-      'weight' => 3,
-      'price' => 3955,
-      ),
-    array(
-      'weight' => 4,
-      'price' => 5155,
-      ),
-    array(
-      'weight' => 5,
-      'price' => 6355,
-      ),
-    array(
-      'weight' => 6,
-      'price' => 7555,
-      ),
-    array(
-      'weight' => 7,
-      'price' => 8755,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 9955,
-      ),
-    array(
       'weight' => 9,
-      'price' => 11155,
-      ),
-    array(
-      'weight' => 10,
-      'price' => 12355,
-      ),
-    array(
-      'weight' => 15,
-      'price' => 18355,
-      ),
-    array(
-      'weight' => 20,
-      'price' => 24355,
-      ),
-    array(
-      'weight' => 25,
-      'price' => 30355,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 36355,
+      'price' => 1555,
       ),
   );
 
   return $rates;
 }
 
-/**
- * Build an array of rates based on Colissimo recommandé Metropole price table
- * @return array
- *  The array has the following form:
- *  [0] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- *  [1] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- * ...
+/*
+ * @file
+ * Defines rates for zone A
+ *
+ * Austria,40 Belgium,56 Denmark,208 Finland,246 Germany,276 Ireland,372 Italy,380 Luxembourg,442
+ * Netherlands,528 Norway,578 Poland,616 Portugal,620 Spain,724 Sweden,752
+ * Switzerland,756 United Kingdom,826
  */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_expert_om1() {
+function hyx_tarif_zone_a() {
   $rates = array(
     array(
-      'weight' => 0.5,
-      'price' => 1185,
-      ),
-    array(
-      'weight' => 1,
-      'price' => 1460,
-      ),
-    array(
       'weight' => 2,
-      'price' => 1971,
+      'price' => 800,
       ),
     array(
       'weight' => 3,
-      'price' => 2482,
+      'price' => 1000,
       ),
     array(
       'weight' => 4,
-      'price' => 2993,
+      'price' => 1500,
       ),
     array(
       'weight' => 5,
-      'price' => 3504,
-      ),
-    array(
-      'weight' => 6,
-      'price' => 4015,
-      ),
-    array(
-      'weight' => 7,
-      'price' => 4526,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 5037,
+      'price' => 2700,
       ),
     array(
       'weight' => 9,
-      'price' => 5548,
+      'price' => 3500,
       ),
     array(
       'weight' => 10,
-      'price' => 6059,
-      ),
-    array(
-      'weight' => 15,
-      'price' => 8459,
-      ),
-    array(
-      'weight' => 20,
-      'price' => 11014,
-      ),
-    array(
-      'weight' => 25,
-      'price' => 13569,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 16124,
-      ),
-  );
-
-  return $rates;
-}
-
-/**
- * Build an array of rates based on Colissimo recommandé Metropole price table
- * @return array
- *  The array has the following form:
- *  [0] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- *  [1] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- * ...
- */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_expert_om2() {
-  $rates = array(
-    array(
-      'weight' => 0.5,
-      'price' => 1745,
-      ),
-    array(
-      'weight' => 1,
-      'price' => 2155,
-      ),
-    array(
-      'weight' => 2,
-      'price' => 3355,
-      ),
-    array(
-      'weight' => 3,
-      'price' => 4555,
-      ),
-    array(
-      'weight' => 4,
-      'price' => 5755,
-      ),
-    array(
-      'weight' => 5,
-      'price' => 6955,
-      ),
-    array(
-      'weight' => 6,
-      'price' => 8155,
-      ),
-    array(
-      'weight' => 7,
-      'price' => 9355,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 10555,
-      ),
-    array(
-      'weight' => 9,
-      'price' => 11755,
-      ),
-    array(
-      'weight' => 10,
-      'price' => 12955,
-      ),
-    array(
-      'weight' => 15,
-      'price' => 18955,
-      ),
-    array(
-      'weight' => 20,
-      'price' => 24955,
-      ),
-    array(
-      'weight' => 25,
-      'price' => 30955,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 36955,
-      ),
-  );
-
-  return $rates;
-}
-
-/**
- * Build an array of rates based on Colissimo recommandé Metropole price table
- * @return array
- *  The array has the following form:
- *  [0] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- *  [1] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- * ...
- */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_expert_i_zone1() {
-  $rates = array(
-    array(
-      'weight' => 1,
-      'price' => 1130,
-      ),
-    array(
-      'weight' => 2,
-      'price' => 1200,
-      ),
-    array(
-      'weight' => 3,
-      'price' => 1270,
-      ),
-    array(
-      'weight' => 4,
-      'price' => 1340,
-      ),
-    array(
-      'weight' => 5,
-      'price' => 1410,
-      ),
-    array(
-      'weight' => 6,
-      'price' => 1480,
-      ),
-    array(
-      'weight' => 7,
-      'price' => 1550,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 1620,
-      ),
-    array(
-      'weight' => 9,
-      'price' => 1690,
-      ),
-    array(
-      'weight' => 10,
-      'price' => 1760,
-      ),
-    array(
-      'weight' => 15,
-      'price' => 2110,
-      ),
-    array(
-      'weight' => 20,
-      'price' => 2460,
-      ),
-    array(
-      'weight' => 25,
-      'price' => 2810,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 3160,
-      ),
-  );
-
-  return $rates;
-}
-
-/**
- * Build an array of rates based on Colissimo recommandé Metropole price table
- * @return array
- *  The array has the following form:
- *  [0] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- *  [1] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- * ...
- */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_expert_i_zone2() {
-  $rates = array(
-    array(
-      'weight' => 1,
-      'price' => 1375,
-      ),
-    array(
-      'weight' => 2,
-      'price' => 1450,
-      ),
-    array(
-      'weight' => 3,
-      'price' => 1525,
-      ),
-    array(
-      'weight' => 4,
-      'price' => 1600,
-      ),
-    array(
-      'weight' => 5,
-      'price' => 1675,
-      ),
-    array(
-      'weight' => 6,
-      'price' => 1750,
-      ),
-    array(
-      'weight' => 7,
-      'price' => 1825,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 1900,
-      ),
-    array(
-      'weight' => 9,
-      'price' => 1975,
-      ),
-    array(
-      'weight' => 10,
-      'price' => 2050,
-      ),
-    array(
-      'weight' => 15,
-      'price' => 2425,
-      ),
-    array(
-      'weight' => 20,
-      'price' => 2800,
-      ),
-    array(
-      'weight' => 25,
-      'price' => 3175,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 3550,
-      ),
-  );
-
-  return $rates;
-}
-
-/**
- * Build an array of rates based on Colissimo recommandé Metropole price table
- * @return array
- *  The array has the following form:
- *  [0] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- *  [1] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- * ...
- */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_expert_i_zone3() {
-  $rates = array(
-    array(
-      'weight' => 1,
-      'price' => 1425,
-      ),
-    array(
-      'weight' => 2,
-      'price' => 1545,
-      ),
-    array(
-      'weight' => 3,
-      'price' => 1665,
-      ),
-    array(
-      'weight' => 4,
-      'price' => 1785,
-      ),
-    array(
-      'weight' => 5,
-      'price' => 1905,
-      ),
-    array(
-      'weight' => 6,
-      'price' => 2025,
-      ),
-    array(
-      'weight' => 7,
-      'price' => 2145,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 2265,
-      ),
-    array(
-      'weight' => 9,
-      'price' => 2385,
-      ),
-    array(
-      'weight' => 10,
-      'price' => 2505,
-      ),
-    array(
-      'weight' => 15,
-      'price' => 3105,
-      ),
-    array(
-      'weight' => 20,
-      'price' => 3705,
-      ),
-    array(
-      'weight' => 25,
-      'price' => 4305,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 4905,
+      'price' => 4000,
       ),
   );
 
@@ -809,159 +73,31 @@ function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_expert_
 }
 
 
-/**
- * Build an array of rates based on Colissimo recommandé Metropole price table
- * @return array
- *  The array has the following form:
- *  [0] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- *  [1] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- * ...
+/*
+ * @file
+ * Defines rates for zone B
+ *
+ * Algeria,12 Bosnia-Herzegovina,70 Bulgaria,100 Czech Republic,203
+ * Estonia,233 Georgia,268 Hungary,348 Kazakhstan,398 Morocco,504
+ * Romania,642 Russia,643 Slovakia,703 Slovenia,705 Tunisia,788 Türkiye,792
  */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_expert_i_zone4() {
+function hyx_tarif_zone_b() {
   $rates = array(
     array(
-      'weight' => 1,
-      'price' => 1820,
-      ),
-    array(
       'weight' => 2,
-      'price' => 1950,
+      'price' => 1500,
       ),
     array(
       'weight' => 3,
-      'price' => 2080,
-      ),
-    array(
-      'weight' => 4,
-      'price' => 2210,
-      ),
-    array(
-      'weight' => 5,
-      'price' => 2340,
-      ),
-    array(
-      'weight' => 6,
-      'price' => 2470,
-      ),
-    array(
-      'weight' => 7,
-      'price' => 2600,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 2730,
-      ),
-    array(
-      'weight' => 9,
-      'price' => 2860,
-      ),
-    array(
-      'weight' => 10,
-      'price' => 2990,
-      ),
-    array(
-      'weight' => 15,
-      'price' => 3640,
-      ),
-    array(
-      'weight' => 20,
-      'price' => 4290,
-      ),
-    array(
-      'weight' => 25,
-      'price' => 4940,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 5590,
-      ),
-  );
-
-  return $rates;
-}
-
-
-/**
- * Build an array of rates based on Colissimo recommandé Metropole price table
- * @return array
- *  The array has the following form:
- *  [0] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- *  [1] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- * ...
- */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_expert_i_zone5() {
-  $rates = array(
-    array(
-      'weight' => 1,
-      'price' => 1850,
-      ),
-    array(
-      'weight' => 2,
       'price' => 2200,
       ),
     array(
-      'weight' => 3,
-      'price' => 2550,
-      ),
-    array(
-      'weight' => 4,
-      'price' => 2900,
-      ),
-    array(
-      'weight' => 5,
-      'price' => 3250,
-      ),
-    array(
-      'weight' => 6,
-      'price' => 3600,
-      ),
-    array(
-      'weight' => 7,
-      'price' => 3950,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 4300,
-      ),
-    array(
       'weight' => 9,
-      'price' => 4650,
+      'price' => 4000,
       ),
     array(
       'weight' => 10,
-      'price' => 5000,
-      ),
-    array(
-      'weight' => 15,
-      'price' => 6500,
-      ),
-    array(
-      'weight' => 20,
-      'price' => 8000,
-      ),
-    array(
-      'weight' => 25,
-      'price' => 9500,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 11000,
+      'price' => 6000,
       ),
   );
 
@@ -969,239 +105,38 @@ function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_expert_
 }
 
 
-/**
- * Build an array of rates based on Colissimo recommandé Metropole price table
- * @return array
- *  The array has the following form:
- *  [0] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- *  [1] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- * ...
+/*
+ * @file
+ * Defines rates for zone C
+ *
+ * Argentina,32 Canada,124 Chile,152 China,156 Colombia,170 Costa Rica,188
+ * Dominican Republic,214 Ecuador,218 El Salvador,222 Hong Kong,344 India,356
+ * Israel,376 Jamaica,388 Japan,392 Korea, Republic of,410 Malta,470 Mauritius,480
+ * Mexico,484 New Zealand,554 Nicaragua,558 Panama,591 Perú,604 Puerto Rico,630
+ * Singapore,702 South Africa,710 Taiwan,158 Thailand,764 United Arab Emirates,784
+ * United States,840 Uruguay,858 Venezuela,862
  */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_expert_i_zone6() {
+function hyx_tarif_zone_c() {
   $rates = array(
     array(
-      'weight' => 1,
-      'price' => 1860,
-      ),
-    array(
       'weight' => 2,
-      'price' => 2230,
-      ),
-    array(
-      'weight' => 3,
-      'price' => 2600,
+      'price' => 2000,
       ),
     array(
       'weight' => 4,
-      'price' => 2970,
+      'price' => 3000,
       ),
     array(
       'weight' => 5,
-      'price' => 3340,
+      'price' => 4500,
       ),
     array(
       'weight' => 6,
-      'price' => 3710,
-      ),
-    array(
-      'weight' => 7,
-      'price' => 4080,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 4450,
-      ),
-    array(
-      'weight' => 9,
-      'price' => 4820,
-      ),
-    array(
-      'weight' => 10,
-      'price' => 5190,
-      ),
-    array(
-      'weight' => 15,
-      'price' => 6790,
-      ),
-    array(
-      'weight' => 20,
-      'price' => 8390,
-      ),
-    array(
-      'weight' => 25,
-      'price' => 9990,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 11590,
-      ),
-  );
-
-  return $rates;
-}
-
-
-/**
- * Build an array of rates based on Colissimo recommandé Metropole price table
- * @return array
- *  The array has the following form:
- *  [0] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- *  [1] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- * ...
- */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_expert_i_zone7() {
-  $rates = array(
-    array(
-      'weight' => 1,
-      'price' => 2365,
-      ),
-    array(
-      'weight' => 2,
-      'price' => 3130,
-      ),
-    array(
-      'weight' => 3,
-      'price' => 3895,
-      ),
-    array(
-      'weight' => 4,
-      'price' => 4660,
-      ),
-    array(
-      'weight' => 5,
-      'price' => 5425,
-      ),
-    array(
-      'weight' => 6,
-      'price' => 6190,
-      ),
-    array(
-      'weight' => 7,
-      'price' => 6955,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 7720,
-      ),
-    array(
-      'weight' => 9,
-      'price' => 8485,
-      ),
-    array(
-      'weight' => 10,
       'price' => 9250,
       ),
     array(
-      'weight' => 15,
-      'price' => 12450,
-      ),
-    array(
-      'weight' => 20,
-      'price' => 15650,
-      ),
-    array(
-      'weight' => 25,
-      'price' => 18850,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 22050,
-      ),
-  );
-
-  return $rates;
-}
-
-
-/**
- * Build an array of rates based on Colissimo recommandé Metropole price table
- * @return array
- *  The array has the following form:
- *  [0] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- *  [1] =>
- *    [weight] => weight limit,
- *    [reco] =>
- *      [order's amount limit] => price,
- *      [order's amount limit] => price,
- * ...
- */
-function commerce_colissimo_entreprise_rates_costic_entreprise_colissimo_expert_i_zone8() {
-  $rates = array(
-    array(
-      'weight' => 1,
-      'price' => 1860,
-      ),
-    array(
-      'weight' => 2,
-      'price' => 2230,
-      ),
-    array(
-      'weight' => 3,
-      'price' => 2600,
-      ),
-    array(
-      'weight' => 4,
-      'price' => 2970,
-      ),
-    array(
-      'weight' => 5,
-      'price' => 3340,
-      ),
-    array(
-      'weight' => 6,
-      'price' => 3710,
-      ),
-    array(
-      'weight' => 7,
-      'price' => 4080,
-      ),
-    array(
-      'weight' => 8,
-      'price' => 4450,
-      ),
-    array(
-      'weight' => 9,
-      'price' => 4820,
-      ),
-    array(
       'weight' => 10,
-      'price' => 5190,
-      ),
-    array(
-      'weight' => 15,
-      'price' => 6790,
-      ),
-    array(
-      'weight' => 20,
-      'price' => 8390,
-      ),
-    array(
-      'weight' => 25,
-      'price' => 9990,
-      ),
-    array(
-      'weight' => 30,
-      'price' => 11590,
+      'price' => 14500,
       ),
   );
 
