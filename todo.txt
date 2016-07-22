@@ -1,0 +1,22 @@
+@todo
+
+- frontpage :
+    * texte intro
+    * css titre panel
+    * bug add to cart
+- livres landing page
+    * css facet api panels
+- livre detail page
+    * css titre panel
+    * cta add to cart
+    * affichage mots clés si nombreux (ex : triennale)
+- auteurs landing page
+    * does not work : change text or ux
+- auteur detail page
+    * kind of sad
+- blog landing page
+    * categorie navigation panel
+    * teaser blog ok ?
+- blog detail page
+    * ux ok ?
+    * re use categorie navigation panel
