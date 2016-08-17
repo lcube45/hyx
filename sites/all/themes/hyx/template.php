@@ -2,9 +2,9 @@
 
 function hyx_preprocess_page(&$variables) {
 
-    if (!empty($variables['node']) && !empty($variables['node']->type)) {
-        $variables['theme_hook_suggestions'][] = 'page__node__' . $variables['node']->type;
-    }
+  if (!empty($variables['node']) && !empty($variables['node']->type)) {
+      $variables['theme_hook_suggestions'][] = 'page__node__' . $variables['node']->type;
+  }
 
   // block de locale
   $variables['locale'] = module_invoke('locale', 'block_view', 'language');
@@ -116,6 +116,12 @@ function hyx_preprocess_field(&$variables) {
   if($variables['element']['#field_name'] == 'field_produit') {
 
   }
+
+  if($variables['element']['#field_name'] == 'field_tags') {
+    foreach($variables['items'] as $id => $item) {
+      $variables['items'][$id]['#attributes']['class'] = array('badge');
+    }
+  }
 }
 
 function hyx_form_alter(&$form, $form_state, $form_id) {
@@ -180,17 +186,21 @@ function hyx_block_view_alter(&$data, $block) {
     $data['content']['field_thematique']['#attributes']['class'][] = 'hyx-bold hyx-cap list-unstyled';
 
     unset($data['content']['field_collection']['#attributes']['class']);
-    $data['content']['field_collection']['#attributes']['class'][] = 'hyx-bold hyx-cap list-unstyled';
+    $data['content']['field_collection']['#attributes']['class'][] = 'hyx-cap list-unstyled';
 
     unset($data['content']['field_langue']['#attributes']['class']);
-    $data['content']['field_langue']['#attributes']['class'][] = 'hyx-bold hyx-cap list-unstyled';
+    $data['content']['field_langue']['#attributes']['class'][] = 'hyx-cap list-unstyled';
 
     unset($data['content']['field_tags']['#attributes']['class']);
-    $data['content']['field_tags']['#attributes']['class'][] = 'hyx-bold hyx-cap list-unstyled';
+    $data['content']['field_tags']['#attributes']['class'][] = 'hyx-cap list-unstyled';
 
     unset($data['content']['type']['#attributes']['class']);
-    $data['content']['type']['#attributes']['class'][] = 'hyx-bold hyx-cap list-unstyled';
+    $data['content']['type']['#attributes']['class'][] = 'hyx-cap list-unstyled';
   }
+}
+
+function hyx_facetapi_deactivate_widget($variables) {
+  return '[x]';
 }
 
 function hyx_pager($variables) {

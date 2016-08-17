@@ -74,7 +74,7 @@
  */
 ?>
 <!-- start top bar -->
-<div class="hyx-header">
+<header class="hyx-header">
   <a href="<?php print $front_page; ?>">
     <div class="hyx-logo-container">
       <img class="hyx-logo" src="<?php print $logo; ?>">
@@ -118,7 +118,7 @@
 
   </ul>
 
-</div>
+</header>
 <!-- end top bar -->
 
 <!-- start navigation -->
@@ -152,11 +152,17 @@
     <section>
         <?php if (!empty($breadcrumb)): print $breadcrumb; endif;?>
         <a id="main-content"></a>
-        <?php print render($title_prefix); ?>
-        <?php if (!empty($title)): ?>
-            <h1><?php print $title; ?></h1>
-        <?php endif; ?>
-        <?php print render($title_suffix); ?>
+
+          <?php print render($title_prefix); ?>
+          <?php if (!empty($title)): ?>
+            <?php if(!$is_front): ?>
+              <h1><?php print $title; ?></h1>
+            <?php else: ?>
+              <h1 class="element-invisible"><?php print $title; ?></h1>
+            <?php endif; ?>
+          <?php endif; ?>
+          <?php print render($title_suffix); ?>
+
         <?php print $messages; ?>
         <?php if (!empty($tabs)): ?>
             <?php print render($tabs); ?>

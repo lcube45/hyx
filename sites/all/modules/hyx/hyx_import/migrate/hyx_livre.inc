@@ -54,6 +54,6 @@ class HyxLIvreMigration extends HyxNodeMigration {
     $this->addFieldMapping('field_produit', 'nid')->sourceMigration('HyxProduct');
 
     // ouvrages similaires
-
+    $this->addFieldMapping('field_livre_similaire', 'field_product_similar')->sourceMigration('Livre');
   }
 }

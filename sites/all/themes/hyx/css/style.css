@@ -2,12 +2,26 @@
  * Styles for the hyx theme.
  */
 
+body {
+    font-size: 16px;
+}
+
 a {
     color: #53caff;
 }
 
 img {
     margin: 0;
+}
+
+.hyx-header-toolbox li ul li {
+    vertical-align: middle;
+    float: none;
+    margin: 5px 0;
+}
+
+.sendinblue-newsletter-mergefields label {
+    display: none;
 }
 
 .field-name-field-image img {
@@ -43,4 +57,23 @@ img {
 .hyx-onecol-banner .center.banner {
     margin-top: 20px;
     padding: 10px 0 10px 0;
+}
+
+.hyx-twocol-livre .top-right .pane-node-body {
+    margin-bottom: 40px;
+}
+
+.hyx-twocol-livre .top-right .pane-node-product-commerce-price {
+    font-size: 2em;
+    padding-top: 20px;
+}
+
+.hyx-twocol-livre .top-right .pane-node-field-produit {
+
+}
+
+.hyx-twocol-livre .top-right .pane-node-field-produit .hyx-button {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    background-color: #ccc;
 }

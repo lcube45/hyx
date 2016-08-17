@@ -1,19 +1,43 @@
 @todo
 
+- editeur wysiwyg
+    * autoriser les attributs custom
+    * ajouter des styles
+    * prévisualiser ces styles dans l'éditeur => @todo avec quentin pour prise en compte
+
+
 - frontpage :
-    * texte intro
-    * css titre panel
+    * texte intro => ok
+    * css titre panel => ok
     * bug add to cart
+    * critere de filtre => ok
+        - promu en page accueil
+    * critère de tri => ok
+        - date de parution : DESC
 - livres landing page
-    * css facet api panels
+    * css facet api panels ? => ok
+    * book card : reduire interlignage titre 1
+    * intervention quentin sur on/off facet filter => ok
+    * critère de tri
+        - promu en page accueil => ok
+        - date de parution : DESC => ok
 - livre detail page
-    * css titre panel
-    * cta add to cart
+    * css titre panel => ok
+    * marge sous le résumé pour décaler les infos ecommerce => ok
+    * cta add to cart à améliorer => ok
+    * retirer référence du cartel d'info en haut => ok
     * affichage mots clés si nombreux (ex : triennale)
+        => déplacer dans la zone du bas en une colonne => ok
+    * livres conseillés :
+        => utiliser les liens existants et pas le contexte => ok
+        => pas de limite de nombre => ok
 - auteurs landing page
     * does not work : change text or ux
+    * retirer resumé
+    * resaisie des titres avec nom et prénom
 - auteur detail page
     * kind of sad
+    * replacer les livres liés à l'auteur
 - blog landing page
     * categorie navigation panel
     * teaser blog ok ?

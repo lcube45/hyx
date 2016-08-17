@@ -4,9 +4,7 @@
     <a href="<?php print $node_url; ?>">
       <?php print render($content['field_soustitre']); ?>
     </a>
-    <a href="<?php print $node_url; ?>">
-      <h3><?php print $title; ?></h3>
-    </a>
+    <h3><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h3>
     <p>Edition : <?php print render($content['field_langue']); ?></p>
     <h5><?php print render($content['product:commerce_price']); ?></h5>
     <ul class="hyx-cover-over-ui">
