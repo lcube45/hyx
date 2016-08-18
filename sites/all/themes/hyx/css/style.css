@@ -60,12 +60,14 @@ img {
 }
 
 .hyx-twocol-livre .top-right .pane-node-body {
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 .hyx-twocol-livre .top-right .pane-node-product-commerce-price {
     font-size: 2em;
-    padding-top: 20px;
+    padding: 20px 0;
+    margin-top: 20px;
+    border: 1px solid #ccc;
 }
 
 .hyx-twocol-livre .top-right .pane-node-field-produit {

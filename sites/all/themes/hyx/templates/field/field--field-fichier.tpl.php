@@ -19,7 +19,7 @@
         );
       ?>
 
-      <a href="<?php print file_create_url($item['#file']->uri); ?>" title="<?php $item['#file']->title; ?>" data-gallery>
+      <a href="<?php print file_create_url($item['#file']->uri); ?>" title="<?php $item['#file']->title; ?>" class="thumbnail" data-gallery>
         <?php print theme('image_style', $image); ?>
       </a>
 
