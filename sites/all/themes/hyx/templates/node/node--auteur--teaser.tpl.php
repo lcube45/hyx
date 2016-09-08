@@ -102,5 +102,4 @@
   hide($content['field_tags']);
   print render($content);
   ?>
-  <p><a href="<?php print $node_url; ?>" class="btn btn-primary" role="button"><?php print t('Read more'); ?></a></p>
 </article>

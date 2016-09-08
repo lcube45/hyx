@@ -37,7 +37,7 @@
     * resaisie des titres avec nom et prénom
 - auteur detail page
     * kind of sad
-    * replacer les livres liés à l'auteur
+    * replacer les livres liés à l'auteur => ok
 - blog landing page
     * categorie navigation panel
     * teaser blog ok ?
