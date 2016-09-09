@@ -100,8 +100,6 @@ function hyx_bootstrap_search_form_wrapper($variables) {
   return $output;
 }
 
-
-
 function hyx_preprocess_field(&$variables) {
 
   if($variables['element']['#field_name'] == 'field_langue') {
@@ -200,7 +198,7 @@ function hyx_block_view_alter(&$data, $block) {
 }
 
 function hyx_facetapi_deactivate_widget($variables) {
-  return '[x]';
+  return ' ';
 }
 
 function hyx_pager($variables) {

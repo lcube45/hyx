@@ -5,6 +5,5 @@
     <?php print render($content['field_soustitre']); ?>
     <h6 class="note"><?php print t('Publié le').' '.date('d/m/Y',$created); ?></h6>
     <p><?php print render($content['body']); ?></p>
-    <p><a href="<?php print $node_url; ?>" class="btn btn-primary" role="button"><?php print t('Read more'); ?></a></p>
   </div>
 </article>

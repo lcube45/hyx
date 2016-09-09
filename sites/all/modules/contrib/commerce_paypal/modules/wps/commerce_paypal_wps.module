@@ -466,6 +466,32 @@ function commerce_paypal_wps_order_form($form, &$form_state, $order, $settings) 
     'os0_1' => commerce_line_items_quantity($wrapper->commerce_line_items, commerce_product_line_item_types()),
   );
 
+  // Check for a billing address
+  if (isset($wrapper->commerce_customer_billing->commerce_customer_address)) {
+    // Assign billing address fields to hidden form values.
+    $billing_address = $wrapper->commerce_customer_billing->commerce_customer_address->value();
+    $data['address1'] = $billing_address['thoroughfare'];
+    $data['address2'] = $billing_address['premise'];
+    $data['first_name'] = $billing_address['first_name'];
+    $data['last_name'] = $billing_address['last_name'];
+    $data['city'] = $billing_address['locality'];
+    $data['state'] = $billing_address['administrative_area'];
+    $data['country'] = $billing_address['country'];
+    $data['zip'] = $billing_address['postal_code'];
+  }
+
+  // Paypal doesn't support state codes for Australia
+  if ($data['country'] == 'AU') {
+    // Load addressfield's adminstrative areas file
+    module_load_include('inc','addressfield','addressfield.administrative_areas');
+    // Look up full state name
+    $australian_states = addressfield_get_administrative_areas('AU');
+    $data['state'] = $australian_states[$billing_address['administrative_area']];
+  }
+
+  // Inject email address info into the data sent to paypal
+  $data['email'] = $order->mail;
+
   // Allow modules to alter parameters of the API request.
   drupal_alter('commerce_paypal_wps_order_form_data', $data, $order);
 
