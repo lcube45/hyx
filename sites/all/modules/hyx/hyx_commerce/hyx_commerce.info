@@ -1,0 +1,15 @@
+name = Commerce
+description = Features Commerce
+core = 7.x
+package = HYX
+version = 7.x-1.0
+dependencies[] = features
+dependencies[] = physical
+dependencies[] = telephone
+features[features_api][] = api:2
+features[field_base][] = field_customer_telephone
+features[field_base][] = field_dimensions
+features[field_base][] = field_poids
+features[field_instance][] = commerce_product-product-field_dimensions
+features[field_instance][] = commerce_product-product-field_poids
+project path = sites/all/modules/hyx

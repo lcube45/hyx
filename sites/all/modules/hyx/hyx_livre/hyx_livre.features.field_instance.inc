@@ -10,7 +10,7 @@
 function hyx_livre_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-livre-body'
+  // Exported field_instance: 'node-livre-body'.
   $field_instances['node-livre-body'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -29,9 +29,15 @@ function hyx_livre_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'teaser' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+      'teaser_livre' => array(
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
@@ -59,7 +65,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_auteur'
+  // Exported field_instance: 'node-livre-field_auteur'.
   $field_instances['node-livre-field_auteur'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -67,16 +73,16 @@ function hyx_livre_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => FALSE,
+          'link' => 0,
         ),
         'type' => 'entityreference_label',
         'weight' => 1,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
           'link' => FALSE,
@@ -90,8 +96,15 @@ function hyx_livre_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 5,
       ),
+      'teaser_livre' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'no_wrapper',
     'field_name' => 'field_auteur',
     'label' => 'Auteur',
     'required' => 0,
@@ -109,7 +122,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_collection'
+  // Exported field_instance: 'node-livre-field_collection'.
   $field_instances['node-livre-field_collection'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -128,7 +141,7 @@ function hyx_livre_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 5,
+        'weight' => 10,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -136,8 +149,15 @@ function hyx_livre_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 17,
       ),
+      'teaser_livre' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
+      ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'no_wrapper',
     'field_name' => 'field_collection',
     'label' => 'Collection',
     'required' => 1,
@@ -155,7 +175,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_couleur'
+  // Exported field_instance: 'node-livre-field_couleur'.
   $field_instances['node-livre-field_couleur'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -170,11 +190,11 @@ function hyx_livre_field_default_field_instances() {
         'weight' => 14,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 14,
+        'type' => 'text_plain',
+        'weight' => 20,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -182,8 +202,15 @@ function hyx_livre_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 10,
       ),
+      'teaser_livre' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 24,
+      ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'no_wrapper',
     'field_name' => 'field_couleur',
     'label' => 'Couleur(s)',
     'required' => 0,
@@ -202,7 +229,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_date'
+  // Exported field_instance: 'node-livre-field_date'.
   $field_instances['node-livre-field_date'] = array(
     'bundle' => 'livre',
     'deleted' => 0,
@@ -234,13 +261,19 @@ function hyx_livre_field_default_field_instances() {
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 12,
+        'weight' => 18,
       ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 19,
+      ),
+      'teaser_livre' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 22,
       ),
     ),
     'entity_type' => 'node',
@@ -272,7 +305,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_document'
+  // Exported field_instance: 'node-livre-field_document'.
   $field_instances['node-livre-field_document'] = array(
     'bundle' => 'livre',
     'deleted' => 0,
@@ -290,13 +323,19 @@ function hyx_livre_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 18,
+        'weight' => 24,
       ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 11,
+      ),
+      'teaser_livre' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 27,
       ),
     ),
     'entity_type' => 'node',
@@ -321,7 +360,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_fichier'
+  // Exported field_instance: 'node-livre-field_fichier'.
   $field_instances['node-livre-field_fichier'] = array(
     'bundle' => 'livre',
     'deleted' => 0,
@@ -339,7 +378,7 @@ function hyx_livre_field_default_field_instances() {
         'module' => 'file',
         'settings' => array(),
         'type' => 'file_default',
-        'weight' => 8,
+        'weight' => 14,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -347,8 +386,15 @@ function hyx_livre_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 18,
       ),
+      'teaser_livre' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
+      ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'ul',
     'field_name' => 'field_fichier',
     'label' => 'Extrait(s)',
     'required' => 0,
@@ -370,7 +416,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_image'
+  // Exported field_instance: 'node-livre-field_image'.
   $field_instances['node-livre-field_image'] = array(
     'bundle' => 'livre',
     'deleted' => 0,
@@ -394,20 +440,31 @@ function hyx_livre_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 9,
+        'weight' => 15,
       ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'livre_mini',
+          'image_style' => '',
         ),
         'type' => 'image',
         'weight' => 1,
       ),
+      'teaser_livre' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => 'livre_teaser',
+        ),
+        'type' => 'image',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'no_wrapper',
     'field_name' => 'field_image',
     'label' => 'Image(s)',
     'required' => 0,
@@ -434,7 +491,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_langue'
+  // Exported field_instance: 'node-livre-field_langue'.
   $field_instances['node-livre-field_langue'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -449,11 +506,11 @@ function hyx_livre_field_default_field_instances() {
         'weight' => 6,
       ),
       'full' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
+        'label' => 'inline',
+        'module' => 'i18n_taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 6,
+        'type' => 'i18n_taxonomy_term_reference_plain',
+        'weight' => 12,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -461,8 +518,16 @@ function hyx_livre_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 13,
       ),
+      'teaser_livre' => array(
+        'label' => 'hidden',
+        'module' => 'i18n_taxonomy',
+        'settings' => array(),
+        'type' => 'i18n_taxonomy_term_reference_plain',
+        'weight' => 17,
+      ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'no_wrapper',
     'field_name' => 'field_langue',
     'label' => 'Langue(s)',
     'required' => 0,
@@ -480,7 +545,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_lien'
+  // Exported field_instance: 'node-livre-field_lien'.
   $field_instances['node-livre-field_lien'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -499,13 +564,19 @@ function hyx_livre_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 10,
+        'weight' => 16,
       ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 21,
+      ),
+      'teaser_livre' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 20,
       ),
     ),
     'entity_type' => 'node',
@@ -544,7 +615,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_livre_similaire'
+  // Exported field_instance: 'node-livre-field_livre_similaire'.
   $field_instances['node-livre-field_livre_similaire'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -567,7 +638,7 @@ function hyx_livre_field_default_field_instances() {
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 19,
+        'weight' => 25,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -575,15 +646,23 @@ function hyx_livre_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 8,
       ),
+      'teaser_livre' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 28,
+      ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'div_div_div',
     'field_name' => 'field_livre_similaire',
-    'label' => 'Ouvrage(s) similaire(s)',
-    'required' => FALSE,
+    'label' => 'Livre(s) conseillé(s)',
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'entityreference',
       'settings' => array(
         'match_operator' => 'CONTAINS',
@@ -595,7 +674,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_nb_page'
+  // Exported field_instance: 'node-livre-field_nb_page'.
   $field_instances['node-livre-field_nb_page'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -615,16 +694,11 @@ function hyx_livre_field_default_field_instances() {
         'weight' => 13,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_integer',
-        'weight' => 13,
+        'settings' => array(),
+        'type' => 'number_unformatted',
+        'weight' => 19,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -632,8 +706,15 @@ function hyx_livre_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 14,
       ),
+      'teaser_livre' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 23,
+      ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'no_wrapper',
     'field_name' => 'field_nb_page',
     'label' => 'Nombre de pages',
     'required' => 0,
@@ -653,7 +734,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_partenaire'
+  // Exported field_instance: 'node-livre-field_partenaire'.
   $field_instances['node-livre-field_partenaire'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -668,11 +749,11 @@ function hyx_livre_field_default_field_instances() {
         'weight' => 16,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 16,
+        'weight' => 22,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -680,8 +761,15 @@ function hyx_livre_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 12,
       ),
+      'teaser_livre' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 26,
+      ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'no_wrapper',
     'field_name' => 'field_partenaire',
     'label' => 'Partenaire',
     'required' => 0,
@@ -700,7 +788,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_produit'
+  // Exported field_instance: 'node-livre-field_produit'.
   $field_instances['node-livre-field_produit'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -731,7 +819,7 @@ function hyx_livre_field_default_field_instances() {
           'show_single_product_attributes' => FALSE,
         ),
         'type' => 'commerce_cart_add_to_cart_form',
-        'weight' => 17,
+        'weight' => 23,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -739,8 +827,22 @@ function hyx_livre_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 7,
       ),
+      'teaser_livre' => array(
+        'label' => 'hidden',
+        'module' => 'commerce_cart',
+        'settings' => array(
+          'combine' => TRUE,
+          'default_quantity' => 1,
+          'line_item_type' => 'product',
+          'show_quantity' => FALSE,
+          'show_single_product_attributes' => FALSE,
+        ),
+        'type' => 'commerce_cart_add_to_cart_form',
+        'weight' => 4,
+      ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'no_wrapper',
     'field_name' => 'field_produit',
     'label' => 'Produit',
     'required' => 1,
@@ -773,7 +875,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_sommaire'
+  // Exported field_instance: 'node-livre-field_sommaire'.
   $field_instances['node-livre-field_sommaire'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -792,13 +894,19 @@ function hyx_livre_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 11,
+        'weight' => 17,
       ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 20,
+      ),
+      'teaser_livre' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 21,
       ),
     ),
     'entity_type' => 'node',
@@ -820,7 +928,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_soustitre'
+  // Exported field_instance: 'node-livre-field_soustitre'.
   $field_instances['node-livre-field_soustitre'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -839,7 +947,7 @@ function hyx_livre_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -847,9 +955,16 @@ function hyx_livre_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'teaser_livre' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
     ),
     'entity_type' => 'node',
-    'fences_wrapper' => 'h3',
+    'fences_wrapper' => 'h5',
     'field_name' => 'field_soustitre',
     'label' => 'Sous-titre',
     'required' => 0,
@@ -868,7 +983,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_tags'
+  // Exported field_instance: 'node-livre-field_tags'.
   $field_instances['node-livre-field_tags'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -887,7 +1002,7 @@ function hyx_livre_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 7,
+        'weight' => 13,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -895,8 +1010,15 @@ function hyx_livre_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 16,
       ),
+      'teaser_livre' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
+      ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'no_wrapper',
     'field_name' => 'field_tags',
     'label' => 'Mots-clés',
     'required' => 0,
@@ -915,7 +1037,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_thematique'
+  // Exported field_instance: 'node-livre-field_thematique'.
   $field_instances['node-livre-field_thematique'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -934,7 +1056,7 @@ function hyx_livre_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 3,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -942,8 +1064,15 @@ function hyx_livre_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 15,
       ),
+      'teaser_livre' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'no_wrapper',
     'field_name' => 'field_thematique',
     'label' => 'Thème(s)',
     'required' => 1,
@@ -961,7 +1090,7 @@ function hyx_livre_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-livre-field_type_reliure'
+  // Exported field_instance: 'node-livre-field_type_reliure'.
   $field_instances['node-livre-field_type_reliure'] = array(
     'bundle' => 'livre',
     'default_value' => NULL,
@@ -976,11 +1105,11 @@ function hyx_livre_field_default_field_instances() {
         'weight' => 15,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 15,
+        'weight' => 21,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -988,8 +1117,15 @@ function hyx_livre_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 6,
       ),
+      'teaser_livre' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 25,
+      ),
     ),
     'entity_type' => 'node',
+    'fences_wrapper' => 'no_wrapper',
     'field_name' => 'field_type_reliure',
     'label' => 'Type de reliure',
     'required' => 0,
@@ -1019,9 +1155,9 @@ function hyx_livre_field_default_field_instances() {
   t('Image(s)');
   t('Langue(s)');
   t('Lien(s)');
+  t('Livre(s) conseillé(s)');
   t('Mots-clés');
   t('Nombre de pages');
-  t('Ouvrage(s) similaire(s)');
   t('Partenaire');
   t('Produit');
   t('Résumé');

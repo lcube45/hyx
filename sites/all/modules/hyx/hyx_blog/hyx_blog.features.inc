@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * hyx_livre.features.inc
+ * hyx_blog.features.inc
  */
 
 /**
  * Implements hook_ctools_plugin_api().
  */
-function hyx_livre_ctools_plugin_api($module = NULL, $api = NULL) {
+function hyx_blog_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "page_manager" && $api == "pages_default") {
     return array("version" => "1");
   }
@@ -22,44 +22,43 @@ function hyx_livre_ctools_plugin_api($module = NULL, $api = NULL) {
 /**
  * Implements hook_views_api().
  */
-function hyx_livre_views_api($module = NULL, $api = NULL) {
+function hyx_blog_views_api($module = NULL, $api = NULL) {
   return array("api" => "3.0");
 }
 
 /**
  * Implements hook_image_default_styles().
  */
-function hyx_livre_image_default_styles() {
+function hyx_blog_image_default_styles() {
   $styles = array();
 
-  // Exported image style: livre_extrait.
-  $styles['livre_extrait'] = array(
-    'label' => 'Livre extrait',
+  // Exported image style: blog_teaser.
+  $styles['blog_teaser'] = array(
+    'label' => 'Blog teaser',
     'effects' => array(
-      6 => array(
-        'name' => 'image_scale',
+      9 => array(
+        'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 350,
-          'height' => 190,
-          'upscale' => 0,
+          'width' => 480,
+          'height' => 300,
         ),
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
   );
 
-  // Exported image style: livre_teaser.
-  $styles['livre_teaser'] = array(
-    'label' => 'Livre teaser',
+  // Exported image style: hyx_blog_large.
+  $styles['hyx_blog_large'] = array(
+    'label' => 'Blog Large',
     'effects' => array(
-      3 => array(
+      10 => array(
         'name' => 'image_scale',
         'data' => array(
-          'width' => 250,
+          'width' => 1140,
           'height' => '',
           'upscale' => 0,
         ),
-        'weight' => 1,
+        'weight' => 2,
       ),
     ),
   );
@@ -70,12 +69,12 @@ function hyx_livre_image_default_styles() {
 /**
  * Implements hook_node_info().
  */
-function hyx_livre_node_info() {
+function hyx_blog_node_info() {
   $items = array(
-    'livre' => array(
-      'name' => t('Livre'),
+    'blog' => array(
+      'name' => t('Blog'),
       'base' => 'node_content',
-      'description' => t('Type de contenu pour les livres'),
+      'description' => t('Type de contenu pour les billets du blog'),
       'has_title' => '1',
       'title_label' => t('Titre'),
       'help' => '',

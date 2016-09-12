@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Auteur feature.
+ */
+
+include_once 'hyx_auteur.features.inc';

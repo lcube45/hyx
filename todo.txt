@@ -44,3 +44,23 @@
 - blog detail page
     * ux ok ?
     * re use categorie navigation panel
+
+
+retour 09/09/2016
+------------------
+
+* libellés courts des langues pour mode responsive => ok à l'arrache
+* bug css langue lorsque pas pas traduite => @quentin
+* css facet api si 2 facettes activées et proches => @quentin
+* liste des livres : affix js sidebar => @later
+* bug grid responsive des livres associés sur fiche livre => ok
+* pagination liste des livres associés sur fiche livre => ok
+* bug grid responsive taxonomy term page - thematique livre => ok
+* taxonomy term page - title - term description => ok
+* bug css couleur du lien à l'intérieur des messages d'alertes => @quentin
+* blog : detail : article suivant et article précédent => ok
+* bug frais de port : expédition gratuite 10 centimes euros => ok
+* permissions des utilisateurs => ok
+* framework bootstrap à mettre à jour
+* ajout d'une balise span autour du texte "ajouter au panier" => ok
+* ajout téléphone dans profil expédition => ok

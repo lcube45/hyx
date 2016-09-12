@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Recherche feature.
+ */
+
+include_once 'hyx_recherche.features.inc';

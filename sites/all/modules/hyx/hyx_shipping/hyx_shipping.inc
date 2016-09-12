@@ -9,6 +9,10 @@
 function hyx_tarif_zone_france() {
   $rates = array(
     array(
+      'weight' => 1.9,
+      'price' => 10,
+    ),
+    array(
       'weight' => 2,
       'price' => 345,
       ),
@@ -43,6 +47,10 @@ function hyx_tarif_zone_france() {
  */
 function hyx_tarif_zone_a() {
   $rates = array(
+    array(
+      'weight' => 1.9,
+      'price' => 10,
+    ),
     array(
       'weight' => 2,
       'price' => 800,
@@ -84,6 +92,10 @@ function hyx_tarif_zone_a() {
 function hyx_tarif_zone_b() {
   $rates = array(
     array(
+      'weight' => 1.9,
+      'price' => 10,
+    ),
+    array(
       'weight' => 2,
       'price' => 1500,
       ),
@@ -118,6 +130,10 @@ function hyx_tarif_zone_b() {
  */
 function hyx_tarif_zone_c() {
   $rates = array(
+    array(
+      'weight' => 1.9,
+      'price' => 10,
+    ),
     array(
       'weight' => 2,
       'price' => 2000,

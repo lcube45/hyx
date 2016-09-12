@@ -65,20 +65,19 @@ function hyx_menu_tree__user_menu(&$variables){
 }
 
 function hyx_links__locale_block(&$variables) {
+  global $language;
 
-    global $language;
+  $variables['attributes']['class'][] = 'list-inline';
 
-    $variables['attributes']['class'][] = 'list-inline';
+  foreach($variables['links'] as $id => $link) {
+    $variables['links'][$id]['attributes']['class'][] = 'btn hyx-radio';
+    //$variables['links'][$id]['attributes']['data-title-xs'] = ucfirst($id);
+    $variables['links'][$id]['title'] = ucfirst($id);
+  }
 
-    foreach($variables['links'] as $id => $link) {
-        $variables['links'][$id]['attributes']['class'][] = 'btn hyx-radio';
-        $variables['links'][$id]['attributes']['data-title-xs'] = ucfirst($id);
-    }
+  $content = theme_links($variables);
 
-    $content = theme_links($variables);
-
-    return $content;
-
+  return $content;
 }
 
 function hyx_form_search_api_page_search_form_hyxsearchpage_alter(&$form, &$form_state, $form_id) {
@@ -138,6 +137,7 @@ function hyx_form_alter(&$form, $form_state, $form_id) {
     $form['submit']['#hide_text'] = false;
     $form['submit']['#icon'] = '<span class="hyx-icon-basket"></span>';
     $form['submit']['#cart'] = true;
+    $form['submit']['#value'] = '<span class="hyx-text-basket">'.t('Add to cart').'</span>';
   }
 }
 

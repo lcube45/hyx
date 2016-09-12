@@ -10,7 +10,7 @@
 function hyx_livre_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'body'
+  // Exported field_base: 'body'.
   $field_bases['body'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -31,7 +31,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'text_with_summary',
   );
 
-  // Exported field_base: 'field_auteur'
+  // Exported field_base: 'field_auteur'.
   $field_bases['field_auteur'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -66,7 +66,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_collection'
+  // Exported field_base: 'field_collection'.
   $field_bases['field_collection'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -93,7 +93,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_couleur'
+  // Exported field_base: 'field_couleur'.
   $field_bases['field_couleur'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -114,7 +114,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_date'
+  // Exported field_base: 'field_date'.
   $field_bases['field_date'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -143,7 +143,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'datestamp',
   );
 
-  // Exported field_base: 'field_document'
+  // Exported field_base: 'field_document'.
   $field_bases['field_document'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -166,7 +166,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'file',
   );
 
-  // Exported field_base: 'field_fichier'
+  // Exported field_base: 'field_fichier'.
   $field_bases['field_fichier'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -189,7 +189,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'file',
   );
 
-  // Exported field_base: 'field_image'
+  // Exported field_base: 'field_image'.
   $field_bases['field_image'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -211,7 +211,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'image',
   );
 
-  // Exported field_base: 'field_langue'
+  // Exported field_base: 'field_langue'.
   $field_bases['field_langue'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -238,7 +238,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_lien'
+  // Exported field_base: 'field_lien'.
   $field_bases['field_lien'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -267,10 +267,10 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'link_field',
   );
 
-  // Exported field_base: 'field_livre_similaire'
+  // Exported field_base: 'field_livre_similaire'.
   $field_bases['field_livre_similaire'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_livre_similaire',
@@ -302,7 +302,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_nb_page'
+  // Exported field_base: 'field_nb_page'.
   $field_bases['field_nb_page'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -317,7 +317,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
-  // Exported field_base: 'field_partenaire'
+  // Exported field_base: 'field_partenaire'.
   $field_bases['field_partenaire'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -338,7 +338,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_produit'
+  // Exported field_base: 'field_produit'.
   $field_bases['field_produit'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -359,7 +359,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'commerce_product_reference',
   );
 
-  // Exported field_base: 'field_sommaire'
+  // Exported field_base: 'field_sommaire'.
   $field_bases['field_sommaire'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -378,7 +378,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_soustitre'
+  // Exported field_base: 'field_soustitre'.
   $field_bases['field_soustitre'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -399,7 +399,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_tags'
+  // Exported field_base: 'field_tags'.
   $field_bases['field_tags'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -426,7 +426,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_thematique'
+  // Exported field_base: 'field_thematique'.
   $field_bases['field_thematique'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -453,7 +453,7 @@ function hyx_livre_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_type_reliure'
+  // Exported field_base: 'field_type_reliure'.
   $field_bases['field_type_reliure'] = array(
     'active' => 1,
     'cardinality' => 1,
