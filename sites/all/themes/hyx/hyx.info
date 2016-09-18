@@ -29,6 +29,7 @@ regions[page_bottom] = Page bottom
 ;stylesheets[all][] = css/hyx-style.css
 ;stylesheets[all][] = css/yamm.css
 stylesheets[all][] = css/style.min.css
+stylesheets[all][] = css/style-addon.css
 stylesheets[all][] = css/blueimp-gallery.min.css
 stylesheets[all][] = css/bootstrap-image-gallery.min.css
 

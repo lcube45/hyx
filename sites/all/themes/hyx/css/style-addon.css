@@ -1,0 +1,13 @@
+#backtotop {
+    background: url(../img/backtotop.png) no-repeat center center;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+
+    #backtotop {
+        background: url(../img/backtotop.png) no-repeat center center;
+        background-size: 70px 70px;
+    }
+
+}
