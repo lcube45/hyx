@@ -98,7 +98,7 @@
 
     <!-- PANIER -->
     <li class="hyx-toolbox-item">
-      <a href="/cart" class="btn hyx-button" data-title="<?php print t('Shopping cart'); ?> (<?php print render($cart['content']); ?>)" data-title-xs="">
+      <a href="/<?php print $language->language; ?>/cart" class="btn hyx-button" data-title="<?php print t('Shopping cart'); ?> (<?php print render($cart['content']); ?>)" data-title-xs="">
         <span class="hyx-icon-basket"></span>
       </a>
     </li>

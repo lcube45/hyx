@@ -59,7 +59,7 @@ function hyx_livre_info_technique_content_type_edit_form_submit($form, &$form_st
 function hyx_livre_info_technique_content_type_render($subtype, $conf, $panel_args, $context) {
 
   $block = new stdClass();
-  $block->title = t('Informations techniques');
+  $block->title = t('Informations');
 
   $items = array();
   $node = $context['panelizer']->data;
