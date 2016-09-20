@@ -119,7 +119,7 @@ function hyx_import_migrate_api() {
     'description' => t('Import Drupal 6 files'),
     'class_name' => 'HyxFileMigration',
     'default_uid' => 1,
-    'source_dir' => '/Users/lcube/Documents/newsletter-hyx',
+    'source_dir' => '/Users/lcube/Documents/editions-hyx-content',
     'destination_dir' => 'public://media',
   );
 

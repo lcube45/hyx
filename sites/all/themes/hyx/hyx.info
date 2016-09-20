@@ -37,8 +37,8 @@ stylesheets[all][] = css/bootstrap-image-gallery.min.css
 ; javascripts
 ; ========================================
 scripts[] = bootstrap/js/bootstrap.min.js
-scripts[] = js/sticky-kit.min.js
-scripts[] = js/hyx.js
+;scripts[] = js/sticky-kit.min.js
+;scripts[] = js/hyx.js
 scripts[] = js/jquery.blueimp-gallery.min.js
 scripts[] = js/bootstrap-image-gallery.min.js
 ;scripts[] = js/jquery-1.11.2.min.js

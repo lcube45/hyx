@@ -90,7 +90,7 @@ function hyx_form_search_api_page_search_form_hyxsearchpage_alter(&$form, &$form
   $form['keys_1']['#title'] = '';
   $form['keys_1']['#size'] = 20;
   $form['keys_1']['#attributes'] = array('class' => array('hyx-form'));
-  $form['keys_1']['#attributes']['placeholder'] = t('Recherche');
+  $form['keys_1']['#attributes']['placeholder'] = t('Search');
 }
 
 function hyx_bootstrap_search_form_wrapper($variables) {
@@ -123,14 +123,15 @@ function hyx_preprocess_field(&$variables) {
 
 function hyx_form_alter(&$form, $form_state, $form_id) {
 
-  if($form_id == 'sendinblue_signup_subscribe_block_newsletter_optin_fr_form') {
+  if($form_id == 'sendinblue_signup_subscribe_block_newsletter_optin_fr_form'
+    || $form_id == 'sendinblue_signup_subscribe_block_newsletter_optin_en_form') {
     $form['#attributes']['class'][] = 'hyx-newsletter';
     $form['fields']['EMAIL']['#attributes']['class'][] = 'hyx-form';
-    $form['fields']['EMAIL']['#attributes']['placeholder'] = t('Votre email');
+    $form['fields']['EMAIL']['#attributes']['placeholder'] = t('Email');
     $form['submit']['#icon'] = '<span class="hyx-icon-envelope"></span>';
     $form['submit']['#icon_position'] = 'after';
     $form['submit']['#newsletter'] = true;
-    $form['submit']['#value'] = t('S\'inscrire');
+    $form['submit']['#value'] = t('Signup');
   }
 
   if((strpos($form_id, 'commerce_cart_add_to_cart_form_') === 0)) {
