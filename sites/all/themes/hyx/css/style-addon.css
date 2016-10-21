@@ -11,3 +11,17 @@
     }
 
 }
+
+#payment-details {
+    padding: 10px;
+    border:1px solid;
+}
+
+.commerce-paypal-icon {
+    display: inline-block;
+}
+
+.btn-default.checkout-continue {
+    color: #fff;
+    background-color: #5bc0de;
+}
