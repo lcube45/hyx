@@ -9,28 +9,24 @@
 function hyx_tarif_zone_france() {
   $rates = array(
     array(
-      'weight' => 0,
-      'price' => 0,
-    ),
-    array(
-      'weight' => 1.999,
+      'weight' => 1.99,
       'price' => 10,
     ),
     array(
-      'weight' => 3,
-      'price' => 345,
+      'weight' => 4.9,
+      'price' => 425,
     ),
     array(
-      'weight' => 5,
-      'price' => 600,
+      'weight' => 9.9,
+      'price' => 650,
     ),
     array(
-      'weight' => 7,
-      'price' => 835,
+      'weight' => 19.9,
+      'price' => 925,
     ),
     array(
-      'weight' => 10,
-      'price' => 1555,
+      'weight' => 29.9,
+      'price' => 1325,
     ),
   );
 
@@ -48,28 +44,32 @@ function hyx_tarif_zone_france() {
 function hyx_tarif_zone_a() {
   $rates = array(
     array(
-      'weight' => 2,
+      'weight' => 0.49,
+      'price' => 600,
+    ),
+    array(
+      'weight' => 0.99,
+      'price' => 700,
+    ),
+    array(
+      'weight' => 1.99,
       'price' => 800,
     ),
     array(
-      'weight' => 3,
+      'weight' => 4.99,
       'price' => 1000,
     ),
     array(
-      'weight' => 4,
-      'price' => 1500,
+      'weight' => 9.99,
+      'price' => 1700,
     ),
     array(
-      'weight' => 5,
-      'price' => 2700,
+      'weight' => 19.99,
+      'price' => 2900,
     ),
     array(
-      'weight' => 10,
+      'weight' => 29.99,
       'price' => 4000,
-    ),
-    array(
-      'weight' => 20,
-      'price' => 5000,
     ),
   );
 
@@ -88,28 +88,32 @@ function hyx_tarif_zone_a() {
 function hyx_tarif_zone_b() {
   $rates = array(
     array(
-      'weight' => 0,
+      'weight' => 0.49,
+      'price' => 800,
+    ),
+    array(
+      'weight' => 0.99,
+      'price' => 950,
+    ),
+    array(
+      'weight' => 1.99,
       'price' => 1000,
     ),
     array(
-      'weight' => 1,
-      'price' => 1200,
+      'weight' => 4.99,
+      'price' => 1350,
     ),
     array(
-      'weight' => 2,
-      'price' => 2000,
+      'weight' => 9.99,
+      'price' => 2500,
     ),
     array(
-      'weight' => 5,
-      'price' => 3000,
+      'weight' => 19.99,
+      'price' => 4000,
     ),
     array(
-      'weight' => 10,
-      'price' => 5000,
-    ),
-    array(
-      'weight' => 20,
-      'price' => 7000,
+      'weight' => 29.99,
+      'price' => 10000,
     ),
   );
 
@@ -131,28 +135,32 @@ function hyx_tarif_zone_b() {
 function hyx_tarif_zone_c() {
   $rates = array(
     array(
-      'weight' => 0,
-      'price' => 1500,
+      'weight' => 0.49,
+      'price' => 1200,
     ),
     array(
-      'weight' => 1,
-      'price' => 2200,
+      'weight' => 0.99,
+      'price' => 1300,
     ),
     array(
-      'weight' => 2,
-      'price' => 3500,
+      'weight' => 1.99,
+      'price' => 1800,
     ),
     array(
-      'weight' => 5,
-      'price' => 7000,
+      'weight' => 4.99,
+      'price' => 2600,
     ),
     array(
-      'weight' => 10,
-      'price' => 13000,
+      'weight' => 9.99,
+      'price' => 6000,
     ),
     array(
-      'weight' => 20,
-      'price' => 16000,
+      'weight' => 19.99,
+      'price' => 10000,
+    ),
+    array(
+      'weight' => 29.99,
+      'price' => 25000,
     ),
   );
 
