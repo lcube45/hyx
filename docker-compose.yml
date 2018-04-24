@@ -1,0 +1,39 @@
+version: '2'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: ./.docker/apache-php/Dockerfile
+    environment:
+      XDEBUG_CONFIG: idekey=PHPSTORM remote_host=10.254.254.254
+    volumes:
+      - .:/var/www/html:cached
+      - ./.docker/apache-php/myphp.ini:/usr/local/etc/php/conf.d/x-myphp.ini
+    ports:
+      - 8080:80
+    expose:
+      - 80
+      - 9000
+  mysql:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: hyx
+      MYSQL_DATABASE: hyx
+      MYSQL_USER: hyx
+      MYSQL_PASSWORD: hyx
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - 8081:80
+volumes:
+  mysql-data:
