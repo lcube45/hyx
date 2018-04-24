@@ -51,7 +51,7 @@
  * @see template_preprocess_html()
  * @see template_process()
  *
- * @ingroup themeable
+ * @ingroup templates
  */
 ?><!DOCTYPE html>
 <html<?php print $html_attributes;?><?php print $rdf_namespaces;?>>
@@ -64,7 +64,7 @@
   <?php print $styles; ?>
   <!-- HTML5 element support for IE6-8 -->
   <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
   <?php print $scripts; ?>
 </head>
